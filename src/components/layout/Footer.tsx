@@ -1,0 +1,187 @@
+"use client";
+
+import Link from "next/link";
+import { motion } from "framer-motion";
+import {
+  Zap,
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  MessageCircle,
+  ChevronRight,
+} from "lucide-react";
+import { siteConfig, categories } from "@/lib/constants";
+
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  );
+}
+
+function FacebookIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  );
+}
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.5 },
+};
+
+export default function Footer() {
+  return (
+    <footer className="bg-primary-dark text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          <motion.div {...fadeInUp}>
+            <Link href="/" className="flex items-center gap-2 mb-6">
+              <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
+                <Zap className="w-6 h-6 text-secondary" />
+              </div>
+              <span className="text-xl font-extrabold tracking-tight">
+                ELECTRO{" "}
+                <span className="text-secondary">BEST</span>
+              </span>
+            </Link>
+            <p className="text-white/70 text-sm leading-relaxed mb-4">
+              {siteConfig.description}
+            </p>
+            <div className="flex gap-3">
+              <a
+                href={siteConfig.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/10 hover:bg-secondary hover:text-black rounded-xl flex items-center justify-center transition-all duration-200"
+              >
+                <InstagramIcon className="w-5 h-5" />
+              </a>
+              <a
+                href={siteConfig.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/10 hover:bg-secondary hover:text-black rounded-xl flex items-center justify-center transition-all duration-200"
+              >
+                <FacebookIcon className="w-5 h-5" />
+              </a>
+              <a
+                href={siteConfig.social.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/10 hover:bg-secondary hover:text-black rounded-xl flex items-center justify-center transition-all duration-200"
+              >
+                <MessageCircle className="w-5 h-5" />
+              </a>
+            </div>
+          </motion.div>
+
+          <motion.div {...fadeInUp} transition={{ duration: 0.5, delay: 0.1 }}>
+            <h3 className="text-lg font-bold mb-6">Categorías</h3>
+            <ul className="space-y-3">
+              {categories.slice(0, 6).map((cat) => (
+                <li key={cat.id}>
+                  <Link
+                    href={`/categorias/${cat.slug}`}
+                    className="flex items-center gap-2 text-white/70 hover:text-secondary transition-colors text-sm"
+                  >
+                    <ChevronRight className="w-3.5 h-3.5" />
+                    {cat.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          <motion.div {...fadeInUp} transition={{ duration: 0.5, delay: 0.2 }}>
+            <h3 className="text-lg font-bold mb-6">Contacto</h3>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm text-white/70">
+                    {siteConfig.address}
+                  </p>
+                  <p className="text-sm text-white/70">
+                    {siteConfig.city}, {siteConfig.province}
+                  </p>
+                </div>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-secondary shrink-0" />
+                <a
+                  href={`tel:${siteConfig.phone}`}
+                  className="text-sm text-white/70 hover:text-secondary transition-colors"
+                >
+                  {siteConfig.phone}
+                </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <Mail className="w-5 h-5 text-secondary shrink-0" />
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="text-sm text-white/70 hover:text-secondary transition-colors"
+                >
+                  {siteConfig.email}
+                </a>
+              </li>
+            </ul>
+          </motion.div>
+
+          <motion.div {...fadeInUp} transition={{ duration: 0.5, delay: 0.3 }}>
+            <h3 className="text-lg font-bold mb-6">Horarios</h3>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3">
+                <Clock className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm font-medium">Lunes a Viernes</p>
+                  <p className="text-sm text-white/70">
+                    {siteConfig.hours.weekdays}
+                  </p>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <Clock className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm font-medium">Sábados</p>
+                  <p className="text-sm text-white/70">
+                    {siteConfig.hours.saturday}
+                  </p>
+                </div>
+              </li>
+            </ul>
+
+            <div className="mt-6 bg-white/5 rounded-2xl p-4">
+              <p className="text-xs text-white/50 mb-2">📍 Encontranos en</p>
+              <div className="bg-white/10 rounded-xl h-28 flex items-center justify-center text-white/30 text-sm">
+                Mapa interactivo
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-white/40 text-sm text-center sm:text-left">
+              © {new Date().getFullYear()} ELECTRO BEST. Todos los derechos
+              reservados.
+            </p>
+            <p className="text-white/30 text-xs text-center">
+              Diseñado con ❤️ para vos
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
