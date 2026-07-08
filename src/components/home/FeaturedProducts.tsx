@@ -11,7 +11,7 @@ export default function FeaturedProducts() {
   const featured = products.filter((p) => p.isOffer).slice(0, 8);
 
   return (
-    <section className="py-16 sm:py-24 bg-bg-alt">
+    <section className="py-16 sm:py-24 pb-16 sm:pb-32 bg-bg-alt">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
           title="Productos Destacados"
