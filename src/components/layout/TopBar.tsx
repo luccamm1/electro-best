@@ -1,6 +1,6 @@
 "use client";
 
-import { Phone, Truck } from "lucide-react";
+import { Phone, Truck, MessageCircle } from "lucide-react";
 import { siteConfig } from "@/lib/constants";
 
 function InstagramIcon({ className }: { className?: string }) {
@@ -60,9 +60,10 @@ export default function TopBar() {
               href={siteConfig.social.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-secondary-light transition-colors font-medium"
+              className="flex items-center gap-1 hover:text-secondary-light transition-colors font-medium"
             >
-              WhatsApp
+              <MessageCircle className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">WhatsApp</span>
             </a>
           </div>
         </div>

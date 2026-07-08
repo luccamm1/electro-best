@@ -11,14 +11,21 @@ export default function FeaturedProducts() {
   const featured = products.filter((p) => p.isOffer).slice(0, 8);
 
   return (
-    <section className="py-16 sm:py-24 pb-16 sm:pb-32 bg-bg-alt">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative py-20 sm:py-28 pb-20 sm:pb-36 bg-bg-alt">
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 50% 50%, currentColor 1px, transparent 1px)`,
+          backgroundSize: '40px 40px',
+          color: '#0B3D91',
+        }} />
+      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <SectionTitle
           title="Productos Destacados"
           subtitle="Las mejores ofertas en tecnología y electrodomésticos"
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
           {featured.map((product, index) => (
             <ProductCard key={product.id} product={product} index={index} />
           ))}
@@ -28,7 +35,7 @@ export default function FeaturedProducts() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mt-10"
+          className="text-center mt-12"
         >
           <Button variant="primary" size="lg">
             Ver todos los productos

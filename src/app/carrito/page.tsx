@@ -16,6 +16,12 @@ import {
 import { useCart } from "@/lib/cart-context";
 import { siteConfig } from "@/lib/constants";
 
+const iconMap: Record<string, string> = {
+  tv: "📺", phone: "📱", speaker: "🔊", fridge: "❄️",
+  laptop: "💻", stove: "🍳", ac: "❄️", blender: "🥤",
+  freezer: "🧊", oven: "🔥", heater: "🌡️", fan: "🌀",
+};
+
 export default function CartPage() {
   const { items, removeItem, updateQuantity, clearCart, total, itemCount } =
     useCart();
@@ -43,7 +49,7 @@ export default function CartPage() {
           </p>
           <Link
             href="/"
-            className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-2xl font-bold text-base hover:bg-primary-light transition-all duration-200 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30"
+            className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-2xl font-bold text-base hover:bg-primary-light transition-all duration-200 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
           >
             <ArrowLeft className="w-5 h-5" />
             Ver productos
@@ -61,12 +67,11 @@ export default function CartPage() {
         className="flex items-center justify-between mb-8"
       >
         <div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-text">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-text tracking-tight">
             Tu Carrito
           </h1>
           <p className="text-text-muted mt-1">
-            {itemCount} {itemCount === 1 ? "producto" : "productos"} en tu
-            carrito
+            {itemCount} {itemCount === 1 ? "producto" : "productos"} en tu carrito
           </p>
         </div>
         <button
@@ -94,31 +99,7 @@ export default function CartPage() {
                   className="shrink-0"
                 >
                   <div className="w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl flex items-center justify-center text-3xl sm:text-4xl border border-border/30">
-                    {item.product.image === "tv"
-                      ? "📺"
-                      : item.product.image === "phone"
-                      ? "📱"
-                      : item.product.image === "speaker"
-                      ? "🔊"
-                      : item.product.image === "fridge"
-                      ? "❄️"
-                      : item.product.image === "laptop"
-                      ? "💻"
-                      : item.product.image === "stove"
-                      ? "🍳"
-                      : item.product.image === "ac"
-                      ? "❄️"
-                      : item.product.image === "blender"
-                      ? "🥤"
-                      : item.product.image === "freezer"
-                      ? "🧊"
-                      : item.product.image === "oven"
-                      ? "🔥"
-                      : item.product.image === "heater"
-                      ? "🌡️"
-                      : item.product.image === "fan"
-                      ? "🌀"
-                      : "📦"}
+                    {iconMap[item.product.image] || "📦"}
                   </div>
                 </Link>
 
@@ -147,12 +128,9 @@ export default function CartPage() {
                     <div className="flex items-center gap-3">
                       <button
                         onClick={() =>
-                          updateQuantity(
-                            item.product.id,
-                            item.quantity - 1
-                          )
+                          updateQuantity(item.product.id, item.quantity - 1)
                         }
-                        className="w-9 h-9 flex items-center justify-center rounded-xl border-2 border-border hover:border-primary hover:text-primary transition-colors"
+                        className="w-9 h-9 flex items-center justify-center rounded-xl border-2 border-border hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-200"
                       >
                         <Minus className="w-4 h-4" />
                       </button>
@@ -161,12 +139,9 @@ export default function CartPage() {
                       </span>
                       <button
                         onClick={() =>
-                          updateQuantity(
-                            item.product.id,
-                            item.quantity + 1
-                          )
+                          updateQuantity(item.product.id, item.quantity + 1)
                         }
-                        className="w-9 h-9 flex items-center justify-center rounded-xl border-2 border-border hover:border-primary hover:text-primary transition-colors"
+                        className="w-9 h-9 flex items-center justify-center rounded-xl border-2 border-border hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-200"
                       >
                         <Plus className="w-4 h-4" />
                       </button>
@@ -174,15 +149,11 @@ export default function CartPage() {
                     <div className="text-right">
                       {item.product.oldPrice && (
                         <p className="text-sm text-text-muted line-through">
-                          {formatPrice(
-                            item.product.oldPrice * item.quantity
-                          )}
+                          {formatPrice(item.product.oldPrice * item.quantity)}
                         </p>
                       )}
                       <p className="text-xl font-extrabold text-primary">
-                        {formatPrice(
-                          item.product.price * item.quantity
-                        )}
+                        {formatPrice(item.product.price * item.quantity)}
                       </p>
                     </div>
                   </div>

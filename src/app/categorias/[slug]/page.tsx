@@ -27,7 +27,7 @@ export default function CategoryPage() {
           </p>
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-primary font-semibold hover:underline"
+            className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-2xl font-semibold hover:bg-primary-light transition-all duration-200 shadow-lg shadow-primary/20"
           >
             <ArrowLeft className="w-4 h-4" />
             Volver al inicio
@@ -43,29 +43,37 @@ export default function CategoryPage() {
 
   return (
     <div className="min-h-screen bg-bg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm font-medium text-text-muted hover:text-primary transition-colors mb-8"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Volver al inicio
-        </Link>
+      <div className="relative bg-gradient-to-br from-primary/5 via-bg to-bg pt-6 sm:pt-8 pb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm font-medium text-text-muted hover:text-primary transition-colors mb-8"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Volver al inicio
+          </Link>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-12"
-        >
-          <div className="w-20 h-20 bg-gradient-to-br from-bg-alt to-bg rounded-3xl flex items-center justify-center mb-6 shadow-sm border border-border/50">
-            <span className="text-4xl">{category.icon}</span>
-          </div>
-          <SectionTitle
-            title={category.name}
-            subtitle={`${categoryProducts.length} productos disponibles`}
-          />
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-6"
+          >
+            <div className="w-20 h-20 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-3xl flex items-center justify-center shadow-sm border border-border/50">
+              <span className="text-4xl">{category.icon}</span>
+            </div>
+            <div className="flex-1">
+              <SectionTitle
+                title={category.name}
+                subtitle={`${categoryProducts.length} productos disponibles`}
+                align="left"
+                className="mb-0"
+              />
+            </div>
+          </motion.div>
+        </div>
+      </div>
 
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
         {categoryProducts.length === 0 ? (
           <div className="text-center py-20">
             <div className="w-20 h-20 bg-bg-alt rounded-full flex items-center justify-center mx-auto mb-4">

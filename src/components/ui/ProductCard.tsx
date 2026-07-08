@@ -46,7 +46,7 @@ function ProductImage({ product }: { product: Product }) {
   return (
     <Link href={`/productos/${product.id}`}>
       <div
-        className={`relative w-full h-52 bg-gradient-to-br ${gradients[product.image] || "from-primary to-primary-light"} flex items-center justify-center overflow-hidden group/img`}
+        className={`relative w-full h-56 bg-gradient-to-br ${gradients[product.image] || "from-primary to-primary-light"} flex items-center justify-center overflow-hidden group/img`}
       >
         <motion.span
           className="text-7xl sm:text-8xl opacity-90 select-none transition-all duration-500 group-hover/img:scale-110 group-hover/img:rotate-6"
@@ -54,7 +54,7 @@ function ProductImage({ product }: { product: Product }) {
         >
           {icons[product.image] || "📦"}
         </motion.span>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300" />
         <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/20" />
       </div>
     </Link>
@@ -72,8 +72,8 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:shadow-primary/15 transition-all duration-500 border border-border/50 hover:border-primary/20 flex flex-col"
+      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="group bg-white rounded-2xl overflow-hidden shadow-md hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-primary/15 transition-all duration-500 border border-border/50 hover:border-primary/20 flex flex-col"
     >
       <div className="relative overflow-hidden">
         <ProductImage product={product} />

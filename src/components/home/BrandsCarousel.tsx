@@ -6,8 +6,8 @@ import SectionTitle from "@/components/ui/SectionTitle";
 
 export default function BrandsCarousel() {
   return (
-    <section className="py-16 sm:py-20 bg-bg-alt overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
+    <section className="py-20 sm:py-24 bg-bg-alt overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
         <SectionTitle
           title="Marcas que trabajamos"
           subtitle="Las mejores marcas del mercado, todas en un solo lugar"
@@ -28,7 +28,7 @@ export default function BrandsCarousel() {
             {[...brands, ...brands].map((brand, i) => (
               <div
                 key={i}
-                className="shrink-0 px-6 sm:px-8 py-4 bg-white rounded-2xl border border-border/50 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300 group"
+                className="shrink-0 px-7 sm:px-9 py-5 bg-white rounded-2xl border border-border/50 shadow-sm hover:shadow-md hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300 group"
               >
                 <span className="text-lg sm:text-xl font-bold text-text-muted group-hover:text-primary transition-colors whitespace-nowrap">
                   {brand}

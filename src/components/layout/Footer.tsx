@@ -41,8 +41,8 @@ const fadeInUp = {
 export default function Footer() {
   return (
     <footer className="bg-primary-dark text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           <motion.div {...fadeInUp}>
             <Link href="/" className="flex items-center gap-2 mb-6">
               <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
@@ -53,7 +53,7 @@ export default function Footer() {
                 <span className="text-secondary">BEST</span>
               </span>
             </Link>
-            <p className="text-white/70 text-sm leading-relaxed mb-4">
+            <p className="text-white/60 text-sm leading-relaxed mb-6">
               {siteConfig.description}
             </p>
             <div className="flex gap-3">
@@ -61,7 +61,7 @@ export default function Footer() {
                 href={siteConfig.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 hover:bg-secondary hover:text-black rounded-xl flex items-center justify-center transition-all duration-200"
+                className="w-10 h-10 bg-white/10 hover:bg-secondary hover:text-black rounded-xl flex items-center justify-center transition-all duration-200 hover:shadow-lg hover:shadow-secondary/20"
               >
                 <InstagramIcon className="w-5 h-5" />
               </a>
@@ -69,7 +69,7 @@ export default function Footer() {
                 href={siteConfig.social.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 hover:bg-secondary hover:text-black rounded-xl flex items-center justify-center transition-all duration-200"
+                className="w-10 h-10 bg-white/10 hover:bg-secondary hover:text-black rounded-xl flex items-center justify-center transition-all duration-200 hover:shadow-lg hover:shadow-secondary/20"
               >
                 <FacebookIcon className="w-5 h-5" />
               </a>
@@ -77,7 +77,7 @@ export default function Footer() {
                 href={siteConfig.social.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 hover:bg-secondary hover:text-black rounded-xl flex items-center justify-center transition-all duration-200"
+                className="w-10 h-10 bg-white/10 hover:bg-secondary hover:text-black rounded-xl flex items-center justify-center transition-all duration-200 hover:shadow-lg hover:shadow-secondary/20"
               >
                 <MessageCircle className="w-5 h-5" />
               </a>
@@ -91,9 +91,9 @@ export default function Footer() {
                 <li key={cat.id}>
                   <Link
                     href={`/categorias/${cat.slug}`}
-                    className="flex items-center gap-2 text-white/70 hover:text-secondary transition-colors text-sm"
+                    className="flex items-center gap-2 text-white/60 hover:text-secondary transition-colors text-sm group"
                   >
-                    <ChevronRight className="w-3.5 h-3.5" />
+                    <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                     {cat.name}
                   </Link>
                 </li>
@@ -107,10 +107,10 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-sm text-white/70">
+                  <p className="text-sm text-white/60">
                     {siteConfig.address}
                   </p>
-                  <p className="text-sm text-white/70">
+                  <p className="text-sm text-white/60">
                     {siteConfig.city}, {siteConfig.province}
                   </p>
                 </div>
@@ -119,7 +119,7 @@ export default function Footer() {
                 <Phone className="w-5 h-5 text-secondary shrink-0" />
                 <a
                   href={`tel:${siteConfig.phone}`}
-                  className="text-sm text-white/70 hover:text-secondary transition-colors"
+                  className="text-sm text-white/60 hover:text-secondary transition-colors"
                 >
                   {siteConfig.phone}
                 </a>
@@ -128,7 +128,7 @@ export default function Footer() {
                 <Mail className="w-5 h-5 text-secondary shrink-0" />
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="text-sm text-white/70 hover:text-secondary transition-colors"
+                  className="text-sm text-white/60 hover:text-secondary transition-colors"
                 >
                   {siteConfig.email}
                 </a>
@@ -143,7 +143,7 @@ export default function Footer() {
                 <Clock className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
                 <div>
                   <p className="text-sm font-medium">Lunes a Viernes</p>
-                  <p className="text-sm text-white/70">
+                  <p className="text-sm text-white/60">
                     {siteConfig.hours.weekdays}
                   </p>
                 </div>
@@ -152,15 +152,15 @@ export default function Footer() {
                 <Clock className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
                 <div>
                   <p className="text-sm font-medium">Sábados</p>
-                  <p className="text-sm text-white/70">
+                  <p className="text-sm text-white/60">
                     {siteConfig.hours.saturday}
                   </p>
                 </div>
               </li>
             </ul>
 
-            <div className="mt-6 bg-white/5 rounded-2xl p-4">
-              <p className="text-xs text-white/50 mb-2">📍 Encontranos en</p>
+            <div className="mt-6 bg-white/[0.04] backdrop-blur-sm rounded-2xl p-4 border border-white/5">
+              <p className="text-xs text-white/40 mb-3">📍 Encontranos en</p>
               <div className="bg-white/10 rounded-xl h-28 flex items-center justify-center text-white/30 text-sm">
                 Mapa interactivo
               </div>

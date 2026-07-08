@@ -12,19 +12,19 @@ export default function Navbar() {
   return (
     <nav className="hidden lg:block bg-white border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ul className="flex items-center justify-center gap-1 h-12">
+        <ul className="flex items-center justify-center gap-0.5 h-12">
           <li>
             <Link
               href="/"
-              className="px-4 py-2 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors"
+              className="relative px-4 py-2 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-0.5 after:bg-primary after:rounded-full after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200"
             >
               Inicio
             </Link>
           </li>
           <li>
             <Link
-              href="/productos"
-              className="px-4 py-2 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors"
+              href="/"
+              className="relative px-4 py-2 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-0.5 after:bg-primary after:rounded-full after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200"
             >
               Productos
             </Link>
@@ -34,7 +34,7 @@ export default function Navbar() {
             onMouseEnter={() => setIsCategoriesOpen(true)}
             onMouseLeave={() => setIsCategoriesOpen(false)}
           >
-            <button className="flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors">
+            <button className="relative flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-0.5 after:bg-primary after:rounded-full after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200">
               Categorías
               <ChevronDown
                 className={`w-4 h-4 transition-transform duration-200 ${
@@ -45,18 +45,18 @@ export default function Navbar() {
             <AnimatePresence>
               {isCategoriesOpen && (
                 <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute top-full left-0 mt-1 w-64 bg-white rounded-2xl shadow-xl border border-border overflow-hidden z-50"
+                  initial={{ opacity: 0, y: 8, scaleY: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scaleY: 1 }}
+                  exit={{ opacity: 0, y: 8, scaleY: 0.95 }}
+                  transition={{ duration: 0.15, ease: "easeOut" }}
+                  className="absolute top-full left-0 mt-1 w-64 bg-white/95 backdrop-blur-lg rounded-2xl shadow-xl shadow-black/5 border border-border/80 overflow-hidden z-50 origin-top"
                 >
                   <div className="p-2">
                     {categories.map((cat) => (
                       <a
                         key={cat.id}
                         href={`/categorias/${cat.slug}`}
-                        className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-text hover:bg-bg-alt hover:text-primary transition-colors"
+                        className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-text hover:bg-primary/5 hover:text-primary transition-all duration-150"
                       >
                         <span className="text-xl">{cat.icon}</span>
                         {cat.name}
@@ -69,7 +69,7 @@ export default function Navbar() {
           </li>
           <li>
             <a
-              href="/ofertas"
+              href="/"
               className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-bold text-error hover:bg-error/5 transition-colors"
             >
               <Flame className="w-4 h-4" />
@@ -78,16 +78,16 @@ export default function Navbar() {
           </li>
           <li>
             <a
-              href="/nosotros"
-              className="px-4 py-2 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors"
+              href="/"
+              className="relative px-4 py-2 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-0.5 after:bg-primary after:rounded-full after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200"
             >
               Nosotros
             </a>
           </li>
           <li>
             <a
-              href="/contacto"
-              className="px-4 py-2 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors"
+              href="/"
+              className="relative px-4 py-2 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-0.5 after:bg-primary after:rounded-full after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200"
             >
               Contacto
             </a>

@@ -14,7 +14,7 @@ export default function Badge({ children, variant = "offer", className = "" }: B
 
   return (
     <span
-      className={`inline-flex items-center px-3 py-1 rounded-lg text-xs ${variants[variant]} ${className}`}
+      className={`inline-flex items-center px-3 py-1.5 rounded-lg text-xs shadow-md ${variants[variant]} ${className}`}
     >
       {children}
     </span>

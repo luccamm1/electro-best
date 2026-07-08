@@ -37,18 +37,9 @@ const gradients: Record<string, string> = {
 };
 
 const icons: Record<string, string> = {
-  tv: "📺",
-  phone: "📱",
-  speaker: "🔊",
-  fridge: "❄️",
-  laptop: "💻",
-  stove: "🍳",
-  ac: "❄️",
-  blender: "🥤",
-  freezer: "🧊",
-  oven: "🔥",
-  heater: "🌡️",
-  fan: "🌀",
+  tv: "📺", phone: "📱", speaker: "🔊", fridge: "❄️",
+  laptop: "💻", stove: "🍳", ac: "❄️", blender: "🥤",
+  freezer: "🧊", oven: "🔥", heater: "🌡️", fan: "🌀",
 };
 
 export default function ProductDetailPage() {
@@ -95,26 +86,27 @@ export default function ProductDetailPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm font-medium text-text-muted hover:text-primary transition-colors mb-6"
+          className="inline-flex items-center gap-2 text-sm font-medium text-text-muted hover:text-primary transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           Volver a productos
         </Link>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 mb-20">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="relative"
           >
             <div
-              className={`relative w-full aspect-square rounded-3xl bg-gradient-to-br ${gradients[product.image] || "from-primary to-primary-light"} flex items-center justify-center overflow-hidden`}
+              className={`relative w-full aspect-square rounded-3xl bg-gradient-to-br ${gradients[product.image] || "from-primary to-primary-light"} flex items-center justify-center overflow-hidden shadow-xl`}
             >
               <motion.span
                 initial={{ scale: 0.8, rotate: -5 }}
                 animate={{ scale: 1, rotate: 0 }}
                 transition={{ type: "spring", stiffness: 100 }}
-                className="text-[12rem] sm:text-[16rem] select-none"
+                className="text-[10rem] sm:text-[16rem] select-none"
               >
                 {icons[product.image] || "📦"}
               </motion.span>
@@ -128,9 +120,7 @@ export default function ProductDetailPage() {
                     transition={{ type: "spring", stiffness: 200, delay: 0.3 }}
                   >
                     <Badge variant="offer">
-                      {product.discount
-                        ? `${product.discount}% OFF`
-                        : "OFERTA"}
+                      {product.discount ? `${product.discount}% OFF` : "OFERTA"}
                     </Badge>
                   </motion.div>
                 </div>
@@ -139,7 +129,6 @@ export default function ProductDetailPage() {
               <button className="absolute top-6 right-6 z-10 p-3 bg-white/90 backdrop-blur-sm rounded-2xl hover:bg-white hover:scale-105 transition-all duration-200 shadow-lg">
                 <Heart className="w-5 h-5 text-text-muted hover:text-error transition-colors" />
               </button>
-
               <button className="absolute top-6 right-20 z-10 p-3 bg-white/90 backdrop-blur-sm rounded-2xl hover:bg-white hover:scale-105 transition-all duration-200 shadow-lg">
                 <Share2 className="w-5 h-5 text-text-muted hover:text-primary transition-colors" />
               </button>
@@ -149,7 +138,7 @@ export default function ProductDetailPage() {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.1 }}
+            transition={{ delay: 0.1, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="flex flex-col"
           >
             <div className="flex items-center gap-3 mb-3">
@@ -162,7 +151,7 @@ export default function ProductDetailPage() {
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text leading-tight mb-4">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text leading-tight mb-4 tracking-tight">
               {product.name}
             </h1>
 
@@ -171,9 +160,7 @@ export default function ProductDetailPage() {
                 <Star
                   key={i}
                   className={`w-5 h-5 ${
-                    i < 4
-                      ? "text-secondary fill-secondary"
-                      : "text-border"
+                    i < 4 ? "text-secondary fill-secondary" : "text-border"
                   }`}
                 />
               ))}
@@ -195,7 +182,7 @@ export default function ProductDetailPage() {
                   )}
                 </div>
               )}
-              <div className="text-4xl sm:text-5xl font-extrabold text-primary">
+              <div className="text-4xl sm:text-5xl font-black text-primary tracking-tight">
                 {formatPrice(product.price)}
               </div>
               <p className="text-sm text-text-muted mt-2">
@@ -235,7 +222,7 @@ export default function ProductDetailPage() {
             <div className="space-y-3 mb-6">
               <motion.button
                 whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.99 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => addItem(product)}
                 className="w-full flex items-center justify-center gap-3 bg-primary text-white py-4 rounded-2xl font-bold text-lg hover:bg-primary-light transition-all duration-200 shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/30"
               >
@@ -278,13 +265,13 @@ export default function ProductDetailPage() {
               viewport={{ once: true }}
               className="mb-8"
             >
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-text mb-2">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-text mb-2 tracking-tight">
                 Productos relacionados
               </h2>
               <p className="text-text-muted">
                 Otros productos en {product.category}
               </p>
-              <div className="w-16 h-1 bg-secondary rounded-full mt-3" />
+              <div className="w-16 h-1.5 bg-gradient-to-r from-secondary to-secondary-light rounded-full mt-3" />
             </motion.div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
