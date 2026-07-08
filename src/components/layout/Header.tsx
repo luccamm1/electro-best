@@ -23,10 +23,10 @@ import { useCart } from "@/lib/cart-context";
 
 const menuItems = [
   { label: "Inicio", href: "/", icon: Home },
-  { label: "Productos", href: "/productos", icon: Package },
-  { label: "Ofertas", href: "/ofertas", icon: Tag },
-  { label: "Nosotros", href: "/nosotros", icon: Store },
-  { label: "Contacto", href: "/contacto", icon: Phone },
+  { label: "Todas las Categorías", href: "/categorias/smart-tv", icon: Package },
+  { label: "Ofertas", href: "/?ofertas", icon: Tag },
+  { label: "Nosotros", href: "/", icon: Store },
+  { label: "Contacto", href: "/", icon: Phone },
 ];
 
 export default function Header() {
@@ -115,7 +115,7 @@ export default function Header() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 lg:hidden"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
