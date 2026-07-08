@@ -3,10 +3,31 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { ShoppingCart, User, Menu, X, Zap } from "lucide-react";
+import {
+  ShoppingCart,
+  User,
+  Menu,
+  X,
+  Zap,
+  Home,
+  Package,
+  Tag,
+  Store,
+  Phone,
+  ChevronRight,
+  Sparkles,
+} from "lucide-react";
 import SearchBar from "@/components/ui/SearchBar";
-import { siteConfig } from "@/lib/constants";
+import { siteConfig, categories } from "@/lib/constants";
 import { useCart } from "@/lib/cart-context";
+
+const menuItems = [
+  { label: "Inicio", href: "/", icon: Home },
+  { label: "Productos", href: "/productos", icon: Package },
+  { label: "Ofertas", href: "/ofertas", icon: Tag },
+  { label: "Nosotros", href: "/nosotros", icon: Store },
+  { label: "Contacto", href: "/contacto", icon: Phone },
+];
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,7 +50,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           <button
-            className="lg:hidden p-2 -ml-2 rounded-lg hover:bg-bg-alt transition-colors"
+            className="lg:hidden relative p-2 -ml-2 rounded-xl hover:bg-bg-alt transition-colors group"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
@@ -105,39 +126,105 @@ export default function Header() {
           height: isMobileMenuOpen ? "auto" : 0,
           opacity: isMobileMenuOpen ? 1 : 0,
         }}
-        transition={{ duration: 0.3 }}
-        className="overflow-hidden lg:hidden bg-white border-t border-border"
+        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+        className="overflow-hidden lg:hidden bg-white border-t border-border shadow-xl"
       >
         <nav className="px-4 py-4 space-y-1">
-          {[
-            ["Inicio", "/"],
-            ["Productos", "/productos"],
-            ["Ofertas", "/ofertas"],
-            ["Nosotros", "/nosotros"],
-            ["Contacto", "/contacto"],
-          ].map(([label, href]) => (
-            <Link
+          <div className="flex items-center gap-3 px-4 py-2 mb-2">
+            <div className="w-10 h-10 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-xl flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <p className="text-sm font-bold text-text">Menú</p>
+              <p className="text-xs text-text-muted">Navegación</p>
+            </div>
+          </div>
+
+          <div className="h-px bg-gradient-to-r from-border/0 via-border to-border/0 mb-2" />
+
+          {menuItems.map(({ label, href, icon: Icon }, i) => (
+            <motion.div
               key={label}
-              href={href}
-              className="flex items-center gap-3 px-4 py-3 rounded-xl text-text font-medium hover:bg-bg-alt hover:text-primary transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: i * 0.05 }}
             >
-              {label}
-            </Link>
+              <Link
+                href={href}
+                className="group flex items-center gap-3 px-4 py-3.5 rounded-xl text-text font-medium hover:bg-gradient-to-r hover:from-primary/5 hover:to-secondary/5 hover:text-primary transition-all duration-200"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <div className="w-9 h-9 rounded-lg bg-bg-alt group-hover:bg-primary/10 flex items-center justify-center transition-colors">
+                  <Icon className="w-4.5 h-4.5 text-text-muted group-hover:text-primary transition-colors" />
+                </div>
+                <span className="flex-1">{label}</span>
+                <ChevronRight className="w-4 h-4 text-text-muted/40 group-hover:text-primary/40 transition-colors" />
+              </Link>
+            </motion.div>
           ))}
+
+          <div className="h-px bg-gradient-to-r from-border/0 via-border to-border/0 my-3" />
+
+          <div className="px-4 py-2">
+            <p className="text-xs font-bold text-text-muted uppercase tracking-wider mb-2">
+              Categorías
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-1.5 px-2">
+            {categories.map((cat, i) => (
+              <motion.div
+                key={cat.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + i * 0.04 }}
+              >
+                <Link
+                  href={`/categorias/${cat.slug}`}
+                  className="flex items-center gap-2.5 px-3 py-3 rounded-xl text-sm font-medium text-text hover:bg-bg-alt hover:text-primary transition-all duration-200"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <span className="text-lg">{cat.icon}</span>
+                  <span>{cat.name}</span>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="h-px bg-gradient-to-r from-border/0 via-border to-border/0 my-3" />
+
           <Link
             href="/carrito"
-            className="flex items-center gap-3 px-4 py-3 rounded-xl text-text font-medium hover:bg-bg-alt hover:text-primary transition-colors"
+            className="group flex items-center gap-3 px-4 py-3.5 rounded-xl text-text font-medium hover:bg-gradient-to-r from-primary/5 to-secondary/5 hover:text-primary transition-all duration-200"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            <ShoppingCart className="w-5 h-5" />
-            Carrito
+            <div className="w-9 h-9 rounded-lg bg-bg-alt group-hover:bg-primary/10 flex items-center justify-center transition-colors">
+              <ShoppingCart className="w-4.5 h-4.5 text-text-muted group-hover:text-primary transition-colors" />
+            </div>
+            <span className="flex-1">Carrito</span>
             {itemCount > 0 && (
-              <span className="ml-auto bg-secondary text-black text-xs font-bold px-2 py-0.5 rounded-full">
+              <span className="bg-secondary text-black text-xs font-bold px-2 py-0.5 rounded-full">
                 {itemCount}
               </span>
             )}
+            <ChevronRight className="w-4 h-4 text-text-muted/40 group-hover:text-primary/40 transition-colors" />
           </Link>
+
+          <div className="px-4 pt-4 pb-2">
+            <div className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl p-4 border border-border/50">
+              <p className="text-xs text-text-muted mb-1">
+                ¿Consultas?
+              </p>
+              <a
+                href={siteConfig.social.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-bold text-primary hover:underline"
+              >
+                {siteConfig.phone}
+              </a>
+            </div>
+          </div>
         </nav>
       </motion.div>
     </header>
