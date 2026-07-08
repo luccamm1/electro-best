@@ -22,12 +22,12 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <a
+            <Link
               href="/productos"
               className="px-4 py-2 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors"
             >
               Productos
-            </a>
+            </Link>
           </li>
           <li
             className="relative"

@@ -9,6 +9,9 @@ export interface Product {
   isOffer?: boolean;
   discount?: number;
   badge?: string;
+  description?: string;
+  specs?: string[];
+  colors?: string[];
 }
 
 export interface Category {
@@ -57,6 +60,8 @@ export const products: Product[] = [
     isOffer: true,
     discount: 20,
     badge: "OFERTA",
+    description: "Disfrutá de una experiencia visual inmersiva con este Smart TV Samsung 55\" 4K UHD. Con su procesador intelligente y colores vibrantes, cada escena cobra vida. Ideal para tu hogar.",
+    specs: ["55 pulgadas", "Resolución 4K UHD", "HDR10+", "Smart TV Tizen", "WiFi + Bluetooth", "3 puertos HDMI"],
   },
   {
     id: 2,
@@ -69,6 +74,8 @@ export const products: Product[] = [
     isOffer: true,
     discount: 14,
     badge: "OFERTA",
+    description: "El iPhone más potente hasta la fecha. Con chip A17 Pro, cámara de 48MP y diseño en titanio. Rendimiento extremo para los que más exigen.",
+    specs: ["Pantalla 6.7\" Super Retina XDR", "Chip A17 Pro", "256GB almacenamiento", "Cámara 48MP", "USB-C", "iOS 17"],
   },
   {
     id: 3,
@@ -81,6 +88,8 @@ export const products: Product[] = [
     isOffer: true,
     discount: 25,
     badge: "OFERTA",
+    description: "Llevá tu música a todos lados con este parlante JBL. Sonido potente, graves profundos y resistencia al agua. Hasta 20 horas de reproducción.",
+    specs: ["Potencia 30W", "Bluetooth 5.3", "Resistente al agua IPX7", "20hs batería", "Altavoz stereo", "Microfono incorporado"],
   },
   {
     id: 4,
@@ -93,6 +102,8 @@ export const products: Product[] = [
     isOffer: true,
     discount: 19,
     badge: "OFERTA",
+    description: "Heladera LG No Frost con 400 litros de capacidad. Tecnología Smart Inverter que ahorra energía y mantiene tus alimentos frescos por más tiempo.",
+    specs: ["400L capacidad total", "No Frost", "Smart Inverter Compressor", "Display digital", "Estantes de vidrio templado", "Cajón verdulero"],
   },
   {
     id: 5,
@@ -105,6 +116,8 @@ export const products: Product[] = [
     isOffer: true,
     discount: 18,
     badge: "OFERTA",
+    description: "Potente notebook HP Pavilion 15 con procesador Intel Core i7 y 16GB de RAM. Ideal para trabajo, estudio y entretenimiento.",
+    specs: ["Intel Core i7 13th Gen", "16GB RAM DDR4", "512GB SSD", "Pantalla 15.6\" FHD", "Windows 11", "Teclado retroiluminado"],
   },
   {
     id: 6,
@@ -117,6 +130,8 @@ export const products: Product[] = [
     isOffer: true,
     discount: 18,
     badge: "OFERTA",
+    description: "Cocina Enova de 5 hornallas con horno de gran capacidad. Diseño moderno en acero inoxidable y encendido eléctrico seguro.",
+    specs: ["5 hornallas", "Horno con visor", "Encendido eléctrico", "Acero inoxidable", "Perilla de seguridad", "Bandeja recolectora"],
   },
   {
     id: 7,
@@ -129,6 +144,8 @@ export const products: Product[] = [
     isOffer: true,
     discount: 18,
     badge: "OFERTA",
+    description: "Aire acondicionado Philips Split de 3000W con tecnología inverter. Frío/calor para todo el año. Eficiencia energética A++.",
+    specs: ["3000W potencia", "Frío / Calor", "Tecnología Inverter", "Eficiencia A++", "Control remoto", "Filtro antipolvo"],
   },
   {
     id: 8,
@@ -141,6 +158,8 @@ export const products: Product[] = [
     isOffer: true,
     discount: 22,
     badge: "OFERTA",
+    description: "Licuadora Liliana profesional con motor de 800W y 6 velocidades. Vaso de vidrio templado de 1.5L. Ideal para preparar todo tipo de bebidas y mezclas.",
+    specs: ["800W de potencia", "Vaso de vidrio 1.5L", "6 velocidades + Pulse", "Cuchillas de acero inoxidable", "Sistema antigoteo", "Base antideslizante"],
   },
   {
     id: 9,
@@ -151,6 +170,8 @@ export const products: Product[] = [
     category: "Refrigeración",
     image: "freezer",
     isOffer: false,
+    description: "Freezer horizontal Whirlpool de 200 litros. Ideal para almacenar grandes cantidades de alimentos congelados. Sistema de congelación rápida.",
+    specs: ["200L capacidad", "Congelación rápida", "Termostato ajustable", "Cestos organizadores", "Cierre de seguridad", "Eficiencia energética A"],
   },
   {
     id: 10,
@@ -163,6 +184,8 @@ export const products: Product[] = [
     isOffer: true,
     discount: 24,
     badge: "OFERTA",
+    description: "Horno eléctrico Atma de 50 litros con función grill y convección. Cocción pareja y rápida. Control de temperatura ajustable.",
+    specs: ["50L capacidad", "Función Grill", "Convección", "Control de temperatura", "Temporizador 60min", "Bandeja + rejilla"],
   },
   {
     id: 11,
@@ -175,6 +198,8 @@ export const products: Product[] = [
     isOffer: true,
     discount: 25,
     badge: "OFERTA",
+    description: "Calefactor eléctrico BGH de 2000W con termostato ajustable. Calefacción rápida y eficiente para ambientes de hasta 25m². Seguridad mejorada.",
+    specs: ["2000W potencia", "Termostato ajustable", "3 modos de calor", "Apagado automático", "Protección sobrecalentamiento", "Silencioso"],
   },
   {
     id: 12,
@@ -187,6 +212,8 @@ export const products: Product[] = [
     isOffer: true,
     discount: 22,
     badge: "OFERTA",
+    description: "Ventilador de pie Liliana con 3 velocidades y oscilación. Ideal para mantener tu hogar fresco en verano. Base estable y diseño moderno.",
+    specs: ["18 pulgadas", "3 velocidades", "Oscilación automática", "Base antideslizante", "Rejilla de seguridad", "Bajo consumo"],
   },
 ];
 

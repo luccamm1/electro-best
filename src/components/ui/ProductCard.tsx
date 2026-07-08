@@ -1,60 +1,69 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShoppingCart, Heart, MessageCircle } from "lucide-react";
+import { ShoppingCart, Heart, Eye } from "lucide-react";
+import Link from "next/link";
 import type { Product } from "@/lib/constants";
-import { siteConfig } from "@/lib/constants";
 import Badge from "./Badge";
+import { useCart } from "@/lib/cart-context";
 
 interface ProductCardProps {
   product: Product;
   index?: number;
 }
 
+const gradients: Record<string, string> = {
+  tv: "from-blue-600 via-blue-700 to-indigo-800",
+  phone: "from-gray-800 via-gray-900 to-black",
+  speaker: "from-red-500 via-red-600 to-red-700",
+  fridge: "from-cyan-400 via-cyan-500 to-blue-600",
+  laptop: "from-gray-600 via-gray-700 to-gray-900",
+  stove: "from-orange-500 via-orange-600 to-red-700",
+  ac: "from-blue-400 via-blue-500 to-cyan-600",
+  blender: "from-slate-200 via-gray-300 to-gray-400",
+  freezer: "from-sky-400 via-sky-500 to-blue-600",
+  oven: "from-orange-400 via-orange-500 to-red-600",
+  heater: "from-red-400 via-red-500 to-orange-600",
+  fan: "from-emerald-400 via-emerald-500 to-teal-600",
+};
+
+const icons: Record<string, string> = {
+  tv: "📺",
+  phone: "📱",
+  speaker: "🔊",
+  fridge: "❄️",
+  laptop: "💻",
+  stove: "🍳",
+  ac: "❄️",
+  blender: "🥤",
+  freezer: "🧊",
+  oven: "🔥",
+  heater: "🌡️",
+  fan: "🌀",
+};
+
 function ProductImage({ product }: { product: Product }) {
-  const gradients: Record<string, string> = {
-    tv: "from-blue-600 to-blue-800",
-    phone: "from-gray-800 to-gray-900",
-    speaker: "from-red-500 to-red-700",
-    fridge: "from-cyan-400 to-cyan-600",
-    laptop: "from-gray-600 to-gray-800",
-    stove: "from-orange-500 to-orange-700",
-    ac: "from-blue-400 to-blue-600",
-    blender: "from-white to-gray-200",
-    freezer: "from-sky-400 to-sky-600",
-    oven: "from-orange-400 to-orange-600",
-    heater: "from-red-400 to-red-600",
-    fan: "from-green-400 to-green-600",
-  };
-
-  const icons: Record<string, string> = {
-    tv: "📺",
-    phone: "📱",
-    speaker: "🔊",
-    fridge: "❄️",
-    laptop: "💻",
-    stove: "🍳",
-    ac: "❄️",
-    blender: "🥤",
-    freezer: "🧊",
-    oven: "🔥",
-    heater: "🌡️",
-    fan: "🌀",
-  };
-
   return (
-    <div
-      className={`relative w-full h-48 bg-gradient-to-br ${gradients[product.image] || "from-primary to-primary-light"} flex items-center justify-center overflow-hidden`}
-    >
-      <span className="text-6xl sm:text-7xl opacity-90 select-none">
-        {icons[product.image] || "📦"}
-      </span>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-    </div>
+    <Link href={`/productos/${product.id}`}>
+      <div
+        className={`relative w-full h-52 bg-gradient-to-br ${gradients[product.image] || "from-primary to-primary-light"} flex items-center justify-center overflow-hidden group/img`}
+      >
+        <motion.span
+          className="text-7xl sm:text-8xl opacity-90 select-none transition-all duration-500 group-hover/img:scale-110 group-hover/img:rotate-6"
+          whileHover={{ scale: 1.1 }}
+        >
+          {icons[product.image] || "📦"}
+        </motion.span>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/20" />
+      </div>
+    </Link>
   );
 }
 
 export default function ProductCard({ product, index = 0 }: ProductCardProps) {
+  const { addItem } = useCart();
+
   const formatPrice = (price: number) =>
     `$${price.toLocaleString("es-AR")}`;
 
@@ -64,59 +73,77 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 border border-border/50 hover:border-primary/20 flex flex-col"
+      className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:shadow-primary/15 transition-all duration-500 border border-border/50 hover:border-primary/20 flex flex-col"
     >
       <div className="relative overflow-hidden">
         <ProductImage product={product} />
         {product.isOffer && (
-          <div className="absolute top-3 left-3 z-10">
+          <motion.div
+            initial={{ x: -60 }}
+            animate={{ x: 0 }}
+            className="absolute top-4 left-4 z-10"
+          >
             <Badge variant="offer">
               {product.discount ? `${product.discount}% OFF` : "OFERTA"}
             </Badge>
-          </div>
+          </motion.div>
         )}
-        <button className="absolute top-3 right-3 z-10 p-2 bg-white/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110">
+        <button className="absolute top-4 right-4 z-10 p-2.5 bg-white/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110 shadow-lg">
           <Heart className="w-4 h-4 text-text-muted hover:text-error transition-colors" />
         </button>
       </div>
 
-      <div className="p-4 flex flex-col flex-1">
-        <span className="text-xs text-text-muted font-medium uppercase tracking-wider mb-1">
-          {product.brand}
-        </span>
-        <h3 className="font-semibold text-text text-sm sm:text-base leading-tight mb-3 line-clamp-2">
+      <Link href={`/productos/${product.id}`} className="p-5 flex flex-col flex-1">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-[11px] text-text-muted font-bold uppercase tracking-[0.15em]">
+            {product.brand}
+          </span>
+          <span className="text-[10px] text-text-muted/60 bg-bg-alt px-2 py-0.5 rounded-full">
+            {product.category}
+          </span>
+        </div>
+        <h3 className="font-bold text-text text-sm sm:text-base leading-snug mb-3 line-clamp-2 group-hover:text-primary transition-colors">
           {product.name}
         </h3>
 
         <div className="mt-auto">
           {product.oldPrice && (
-            <p className="text-sm text-text-muted line-through mb-1">
-              {formatPrice(product.oldPrice)}
-            </p>
+            <div className="flex items-center gap-2 mb-1">
+              <p className="text-sm text-text-muted line-through">
+                {formatPrice(product.oldPrice)}
+              </p>
+              {product.discount && (
+                <span className="text-xs font-bold text-success bg-success/10 px-2 py-0.5 rounded-full">
+                  Ahorrá {product.discount}%
+                </span>
+              )}
+            </div>
           )}
-          <p className="text-xl font-bold text-primary mb-4">
+          <p className="text-2xl font-extrabold text-primary mb-4 tracking-tight">
             {formatPrice(product.price)}
           </p>
 
-          <div className="grid grid-cols-2 gap-2">
-            <button className="col-span-2 w-full bg-primary text-white py-2.5 rounded-xl font-semibold text-sm hover:bg-primary-light transition-colors duration-200 shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 active:scale-[0.98]">
-              Comprar
-            </button>
-            <a
-              href={siteConfig.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl border-2 border-success text-success font-medium text-sm hover:bg-success hover:text-white transition-all duration-200"
+          <div className="grid grid-cols-2 gap-2.5">
+            <Link
+              href={`/productos/${product.id}`}
+              className="col-span-2 flex items-center justify-center gap-2 bg-primary text-white py-3 rounded-xl font-bold text-sm hover:bg-primary-light transition-all duration-200 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
             >
-              <MessageCircle className="w-4 h-4" />
-              <span className="hidden sm:inline">WhatsApp</span>
-            </a>
-            <button className="flex items-center justify-center py-2.5 rounded-xl border-2 border-border text-text-muted hover:border-primary hover:text-primary transition-all duration-200">
+              <Eye className="w-4 h-4" />
+              Ver detalle
+            </Link>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                addItem(product);
+              }}
+              className="col-span-2 flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-border text-text font-semibold text-sm hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-200 active:scale-[0.98]"
+            >
               <ShoppingCart className="w-4 h-4" />
+              Agregar al carrito
             </button>
           </div>
         </div>
-      </div>
+      </Link>
     </motion.div>
   );
 }
