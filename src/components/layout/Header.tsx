@@ -115,7 +115,7 @@ export default function Header() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/20 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/30 z-40 lg:hidden"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
@@ -127,7 +127,7 @@ export default function Header() {
           opacity: isMobileMenuOpen ? 1 : 0,
         }}
         transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-        className="overflow-hidden lg:hidden bg-white border-t border-border shadow-xl"
+        className="overflow-hidden lg:hidden bg-white border-t border-border shadow-xl relative z-50"
       >
         <nav className="px-4 py-4 space-y-1">
           <div className="flex items-center gap-3 px-4 py-2 mb-2">
