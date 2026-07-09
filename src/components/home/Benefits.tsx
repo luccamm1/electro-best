@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import {
   Headphones,
   Truck,
@@ -19,19 +16,6 @@ const iconMap: Record<string, React.ReactNode> = {
   "credit-card": <CreditCard className="w-7 h-7" />,
 };
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const } },
-};
-
 export default function Benefits() {
   return (
     <section className="py-20 sm:py-28 bg-bg">
@@ -41,17 +25,10 @@ export default function Benefits() {
           subtitle="Nos comprometemos a brindarte la mejor experiencia de compra"
         />
 
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6"
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {benefits.map((benefit) => (
-            <motion.div
+            <div
               key={benefit.id}
-              variants={item}
               className="group bg-white rounded-2xl p-6 sm:p-8 border border-border/50 hover:border-primary/20 shadow-sm hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 text-center"
             >
               <div className="w-16 h-16 mx-auto mb-5 bg-gradient-to-br from-primary/5 to-primary/10 group-hover:from-primary group-hover:to-primary-light rounded-2xl flex items-center justify-center text-primary group-hover:text-white transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-lg group-hover:shadow-primary/25">
@@ -63,9 +40,9 @@ export default function Benefits() {
               <p className="text-text-muted text-sm leading-relaxed">
                 {benefit.description}
               </p>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

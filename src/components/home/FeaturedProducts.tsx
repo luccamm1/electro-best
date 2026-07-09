@@ -57,13 +57,9 @@ export default function FeaturedProducts() {
           subtitle="Explorá nuestras marcas líderes y encontrá el producto perfecto para vos"
         />
 
-        {brandEntries.slice(0, 4).map(([brand, brandProducts], i) => (
-          <motion.div
+        {brandEntries.slice(0, 4).map(([brand, brandProducts]) => (
+          <div
             key={brand}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
             className="mb-10 sm:mb-14 last:mb-0"
           >
             <div className="flex items-center gap-2.5 mb-5 sm:mb-6">
@@ -83,13 +79,10 @@ export default function FeaturedProducts() {
             </div>
 
             <BrandCarousel products={brandProducts} brand={brand} />
-          </motion.div>
+          </div>
         ))}
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+        <div
           className="relative mt-16 sm:mt-20 text-center"
         >
           <div className="absolute left-1/2 -translate-x-1/2 -top-6 w-16 h-[2px] bg-gradient-to-r from-primary/20 via-primary to-primary/20 rounded-full" />
@@ -106,7 +99,7 @@ export default function FeaturedProducts() {
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

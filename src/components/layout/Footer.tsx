@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   Zap,
   Phone,
@@ -31,19 +28,12 @@ function FacebookIcon({ className }: { className?: string }) {
   );
 }
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.5 },
-};
-
 export default function Footer() {
   return (
     <footer className="bg-primary-dark text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
-          <motion.div {...fadeInUp}>
+          <div>
             <Link href="/" className="flex items-center gap-2 mb-6">
               <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
                 <Zap className="w-6 h-6 text-secondary" />
@@ -82,9 +72,9 @@ export default function Footer() {
                 <MessageCircle className="w-5 h-5" />
               </a>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div {...fadeInUp} transition={{ duration: 0.5, delay: 0.1 }}>
+          <div>
             <h3 className="text-lg font-bold mb-6">Categorías</h3>
             <ul className="space-y-3">
               {categories.slice(0, 6).map((cat) => (
@@ -99,9 +89,9 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
-          <motion.div {...fadeInUp} transition={{ duration: 0.5, delay: 0.2 }}>
+          <div>
             <h3 className="text-lg font-bold mb-6">Contacto</h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
@@ -134,9 +124,9 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
-          </motion.div>
+          </div>
 
-          <motion.div {...fadeInUp} transition={{ duration: 0.5, delay: 0.3 }}>
+          <div>
             <h3 className="text-lg font-bold mb-6">Horarios</h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
@@ -165,9 +155,9 @@ export default function Footer() {
                 Mapa interactivo
               </div>
             </div>
-          </motion.div>
+            </div>
+          </div>
         </div>
-      </div>
 
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">

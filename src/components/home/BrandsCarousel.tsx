@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { brands } from "@/lib/constants";
 import SectionTitle from "@/components/ui/SectionTitle";
 
@@ -18,12 +15,7 @@ export default function BrandsCarousel() {
         <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-r from-bg-alt to-transparent z-10" />
         <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-l from-bg-alt to-transparent z-10" />
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="flex"
-        >
+        <div className="flex">
           <div className="flex gap-12 sm:gap-20 items-center animate-scroll">
             {[...brands, ...brands].map((brand, i) => (
               <div
@@ -36,7 +28,7 @@ export default function BrandsCarousel() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

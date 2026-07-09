@@ -1,22 +1,6 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 import { testimonials } from "@/lib/constants";
 import SectionTitle from "@/components/ui/SectionTitle";
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const } },
-};
 
 export default function Testimonials() {
   return (
@@ -27,17 +11,10 @@ export default function Testimonials() {
           subtitle="La opinión de quienes ya confiaron en nosotros"
         />
 
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((t) => (
-            <motion.div
+            <div
               key={t.id}
-              variants={item}
               className="group bg-white rounded-2xl p-6 sm:p-8 border border-border/50 hover:border-primary/20 shadow-sm hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 relative"
             >
               <Quote className="absolute top-5 right-5 w-8 h-8 text-primary/5 group-hover:text-primary/15 transition-colors" />
@@ -70,9 +47,9 @@ export default function Testimonials() {
               <p className="text-text-muted text-sm leading-relaxed">
                 &ldquo;{t.comment}&rdquo;
               </p>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
