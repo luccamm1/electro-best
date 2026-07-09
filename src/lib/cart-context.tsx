@@ -5,6 +5,7 @@ import {
   useContext,
   useState,
   useCallback,
+  useEffect,
   type ReactNode,
 } from "react";
 import type { Product } from "@/lib/constants";
@@ -24,10 +25,38 @@ interface CartContextType {
   total: number;
 }
 
+const STORAGE_KEY = "eb_cart";
+
+function loadCart(): CartItem[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const data = localStorage.getItem(STORAGE_KEY);
+    return data ? JSON.parse(data) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveCart(items: CartItem[]) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+  } catch {}
+}
+
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setItems(loadCart());
+    setHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (hydrated) saveCart(items);
+  }, [items, hydrated]);
 
   const addItem = useCallback((product: Product) => {
     setItems((prev) => {
