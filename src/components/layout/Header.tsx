@@ -101,9 +101,9 @@ export default function Header() {
             <Image
               src="/electro-logo.png"
               alt="Electro Best"
-              width={240}
-              height={65}
-              className="h-[65px] sm:h-[60px] w-auto"
+              width={280}
+              height={70}
+              className="h-[70px] sm:h-[60px] w-auto"
               priority
             />
           </Link>
