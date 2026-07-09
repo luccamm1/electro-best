@@ -68,32 +68,34 @@ export default function Hero() {
         <ChevronLeft className="w-5 h-5" />
       </button>
 
-      <motion.div
-        className="flex h-full"
-        animate={{ x: -(currentIndex * viewWidth) }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        drag="x"
-        dragConstraints={{
-          left: -(maxIndex * viewWidth),
-          right: 0,
-        }}
-        dragElastic={0.1}
-        onDragEnd={handleDragEnd}
-      >
-        {slides.map((slide, i) => (
-          <div key={i} className="relative w-screen h-full flex-shrink-0 flex items-center justify-center bg-primary-dark overflow-hidden">
-            <Image
-              src={slide.image}
-              alt=""
-              fill
-              className="object-cover"
-              draggable={false}
-              priority={i === 0}
-              sizes="100vw"
-            />
-          </div>
-        ))}
-      </motion.div>
+      <div className="absolute inset-0">
+        <motion.div
+          className="flex h-full"
+          animate={{ x: -(currentIndex * viewWidth) }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          drag="x"
+          dragConstraints={{
+            left: -(maxIndex * viewWidth),
+            right: 0,
+          }}
+          dragElastic={0.1}
+          onDragEnd={handleDragEnd}
+        >
+          {slides.map((slide, i) => (
+            <div key={i} className="relative w-screen h-full flex-shrink-0 flex items-center justify-center bg-primary-dark overflow-hidden">
+              <Image
+                src={slide.image}
+                alt=""
+                fill
+                className="object-cover"
+                draggable={false}
+                priority={i === 0}
+                sizes="100vw"
+              />
+            </div>
+          ))}
+        </motion.div>
+      </div>
 
       <button
         onClick={goNext}
