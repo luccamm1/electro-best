@@ -48,7 +48,7 @@ export default function BrandCarousel({ products, brand }: BrandCarouselProps) {
     if (isPaused || maxIndex <= 0) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    }, 3000);
+    }, 5000);
     return () => clearInterval(interval);
   }, [maxIndex, isPaused]);
 
