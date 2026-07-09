@@ -10,6 +10,7 @@ import { useCart } from "@/lib/cart-context";
 interface ProductCardProps {
   product: Product;
   index?: number;
+  animated?: boolean;
 }
 
 const gradients: Record<string, string> = {
@@ -61,7 +62,7 @@ function ProductImage({ product }: { product: Product }) {
   );
 }
 
-export default function ProductCard({ product, index = 0 }: ProductCardProps) {
+export default function ProductCard({ product, index = 0, animated = true }: ProductCardProps) {
   const { addItem } = useCart();
 
   const formatPrice = (price: number) =>
@@ -69,10 +70,14 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
+      {...(animated
+        ? {
+            initial: { opacity: 0, y: 30 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true },
+            transition: { duration: 0.5, delay: index * 0.08, ease: [0.25, 0.46, 0.45, 0.94] },
+          }
+        : {})}
       className="group bg-white rounded-2xl overflow-hidden shadow-md hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-primary/15 transition-all duration-500 border border-border/50 hover:border-primary/20 flex flex-col"
     >
       <div className="relative overflow-hidden">

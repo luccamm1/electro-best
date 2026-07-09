@@ -15,7 +15,7 @@ export default function AllProducts() {
 
         <div className="grid grid-cols-2 gap-3 sm:gap-4">
           {products.map((product, index) => (
-            <ProductCard key={product.id} product={product} index={index} />
+            <ProductCard key={product.id} product={product} index={index} animated={false} />
           ))}
         </div>
       </div>
