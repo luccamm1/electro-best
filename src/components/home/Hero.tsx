@@ -27,23 +27,24 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-[80vh] sm:min-h-[90vh] flex items-center overflow-hidden"
+      className="relative w-full h-auto min-h-[40vh] sm:min-h-[50vh] lg:min-h-[70vh] overflow-hidden bg-primary-dark"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
       <AnimatePresence>
-        <motion.div
+        <motion.img
           key={activeIndex}
+          src={slides[activeIndex].image}
+          alt=""
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.6 }}
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${slides[activeIndex].image})` }}
+          className="absolute inset-0 w-full h-full object-contain sm:object-cover"
         />
       </AnimatePresence>
 
-      <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+      <div className="absolute bottom-4 sm:bottom-10 left-1/2 -translate-x-1/2 flex gap-2 z-20">
         {slides.map((_, i) => (
           <button
             key={i}
@@ -57,7 +58,7 @@ export default function Hero() {
         ))}
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-40 bg-gradient-to-t from-bg via-bg/50 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-32 bg-gradient-to-t from-bg via-bg/50 to-transparent pointer-events-none" />
     </section>
   );
 }
