@@ -23,7 +23,7 @@ export default function Navbar() {
           </li>
           <li>
             <Link
-              href="/"
+              href="/productos"
               className="relative px-4 py-2 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-0.5 after:bg-primary after:rounded-full after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200"
             >
               Productos
@@ -68,13 +68,13 @@ export default function Navbar() {
             </AnimatePresence>
           </li>
           <li>
-            <a
-              href="/"
+            <Link
+              href="/productos"
               className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-bold text-error hover:bg-error/5 transition-colors"
             >
               <Flame className="w-4 h-4" />
               Ofertas
-            </a>
+            </Link>
           </li>
           <li>
             <a

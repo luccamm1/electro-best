@@ -23,8 +23,8 @@ import { useCart } from "@/lib/cart-context";
 
 const menuItems = [
   { label: "Inicio", href: "/", icon: Home },
-  { label: "Todas las Categorías", href: "/categorias/smart-tv", icon: Package },
-  { label: "Ofertas", href: "/?ofertas", icon: Tag },
+  { label: "Todos los Productos", href: "/productos", icon: Package },
+  { label: "Ofertas", href: "/productos", icon: Tag },
   { label: "Nosotros", href: "/", icon: Store },
   { label: "Contacto", href: "/", icon: Phone },
 ];
