@@ -84,7 +84,7 @@ export default function FeaturedProducts() {
             <Button
               variant="primary"
               size="lg"
-              className="!px-8 sm:!px-10 !py-4 sm:!py-5 !text-sm sm:!text-base !shadow-xl !shadow-primary/25 hover:!shadow-primary/30"
+              className="!px-8 sm:!px-10 !py-5 sm:!py-6 !text-sm sm:!text-base !shadow-xl !shadow-primary/25 hover:!shadow-primary/30"
             >
               Ver todos los productos
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />

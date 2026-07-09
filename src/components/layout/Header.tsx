@@ -205,14 +205,14 @@ export default function Header() {
                       <Link
                         href="/carrito"
                         onClick={() => setIsCartOpen(false)}
-                        className="flex-1 text-center py-2.5 rounded-xl border border-border text-sm font-semibold text-text hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-200"
+                        className="flex-1 text-center py-3 rounded-xl border border-border text-sm font-semibold text-text hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-200"
                       >
                         Ver carrito
                       </Link>
                       {items.length > 0 && (
                         <button
                           onClick={whatsappCheckout}
-                          className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-success text-white text-sm font-bold hover:bg-green-600 transition-all duration-200"
+                          className="flex-1 flex items-center justify-center gap-1.5 py-3 rounded-xl bg-success text-white text-sm font-bold hover:bg-green-600 transition-all duration-200"
                         >
                           <MessageCircle className="w-4 h-4" />
                           Comprar

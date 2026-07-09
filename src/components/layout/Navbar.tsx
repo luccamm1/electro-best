@@ -15,7 +15,7 @@ export default function Navbar() {
           <li>
             <Link
               href="/"
-              className="relative px-4 py-2 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-0.5 after:bg-primary after:rounded-full after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200"
+              className="relative px-4 py-3 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-0.5 after:bg-primary after:rounded-full after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200"
             >
               Inicio
             </Link>
@@ -23,7 +23,7 @@ export default function Navbar() {
           <li>
             <Link
               href="/productos"
-              className="relative px-4 py-2 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-0.5 after:bg-primary after:rounded-full after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200"
+              className="relative px-4 py-3 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-0.5 after:bg-primary after:rounded-full after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200"
             >
               Productos
             </Link>
@@ -33,7 +33,7 @@ export default function Navbar() {
             onMouseEnter={() => setIsCategoriesOpen(true)}
             onMouseLeave={() => setIsCategoriesOpen(false)}
           >
-            <button className="relative flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-0.5 after:bg-primary after:rounded-full after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200">
+            <button className="relative flex items-center gap-1 px-4 py-3 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-0.5 after:bg-primary after:rounded-full after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200">
               Categorías
               <ChevronDown
                 className={`w-4 h-4 transition-transform duration-200 ${
@@ -66,7 +66,7 @@ export default function Navbar() {
           <li>
             <Link
               href="/productos"
-              className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-bold text-error hover:bg-error/5 transition-colors"
+              className="flex items-center gap-1.5 px-4 py-3 rounded-lg text-sm font-bold text-error hover:bg-error/5 transition-colors"
             >
               <Flame className="w-4 h-4" />
               Ofertas
@@ -75,7 +75,7 @@ export default function Navbar() {
           <li>
             <a
               href="/"
-              className="relative px-4 py-2 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-0.5 after:bg-primary after:rounded-full after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200"
+              className="relative px-4 py-3 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-0.5 after:bg-primary after:rounded-full after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200"
             >
               Nosotros
             </a>
@@ -83,7 +83,7 @@ export default function Navbar() {
           <li>
             <a
               href="/"
-              className="relative px-4 py-2 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-0.5 after:bg-primary after:rounded-full after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200"
+              className="relative px-4 py-3 rounded-lg text-sm font-medium text-text hover:text-primary hover:bg-bg-alt transition-colors after:absolute after:bottom-1 after:left-4 after:right-4 after:h-0.5 after:bg-primary after:rounded-full after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200"
             >
               Contacto
             </a>

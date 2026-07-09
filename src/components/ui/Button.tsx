@@ -26,9 +26,9 @@ export default function Button({
     "inline-flex items-center justify-center font-bold rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
 
   const sizes = {
-    sm: "px-5 py-2 text-sm gap-1.5",
-    md: "px-6 py-3 text-base gap-2",
-    lg: "px-8 py-4 text-base gap-2.5",
+    sm: "px-5 py-3 text-sm gap-1.5",
+    md: "px-6 py-4 text-base gap-2",
+    lg: "px-8 py-5 text-base gap-2.5",
   };
 
   const variants = {

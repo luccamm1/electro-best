@@ -62,7 +62,7 @@ export default function Hero() {
     >
       <button
         onClick={goPrev}
-        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/25 hover:bg-black/45 text-white flex items-center justify-center transition-all duration-200 backdrop-blur-sm active:scale-95"
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/25 hover:bg-black/45 text-white flex items-center justify-center transition-all duration-200 backdrop-blur-sm active:scale-95"
         aria-label="Anterior"
       >
         <ChevronLeft className="w-5 h-5" />
@@ -99,7 +99,7 @@ export default function Hero() {
 
       <button
         onClick={goNext}
-        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/25 hover:bg-black/45 text-white flex items-center justify-center transition-all duration-200 backdrop-blur-sm active:scale-95"
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/25 hover:bg-black/45 text-white flex items-center justify-center transition-all duration-200 backdrop-blur-sm active:scale-95"
         aria-label="Siguiente"
       >
         <ChevronRight className="w-5 h-5" />

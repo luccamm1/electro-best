@@ -118,7 +118,7 @@ export default function ProductCard({ product, index = 0, animated = true }: Pro
           <div className="grid grid-cols-2 gap-2">
             <Link
               href={`/productos/${product.id}`}
-              className="col-span-2 flex items-center justify-center gap-1.5 bg-primary text-white py-2 rounded-xl font-bold text-xs hover:bg-primary-light transition-all duration-200 shadow-md shadow-primary/20 active:scale-[0.98]"
+              className="col-span-2 flex items-center justify-center gap-1.5 bg-primary text-white py-3 rounded-xl font-bold text-xs hover:bg-primary-light transition-all duration-200 shadow-md shadow-primary/20 active:scale-[0.98]"
             >
               <Eye className="w-3.5 h-3.5" />
               Ver detalle
@@ -128,7 +128,7 @@ export default function ProductCard({ product, index = 0, animated = true }: Pro
                 e.preventDefault();
                 addItem(product);
               }}
-              className="col-span-2 flex items-center justify-center gap-1.5 py-2 rounded-xl border border-border text-text font-semibold text-xs hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-200 active:scale-[0.98]"
+              className="col-span-2 flex items-center justify-center gap-1.5 py-3 rounded-xl border border-border text-text font-semibold text-xs hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-200 active:scale-[0.98]"
             >
               <ShoppingCart className="w-3.5 h-3.5" />
               Agregar

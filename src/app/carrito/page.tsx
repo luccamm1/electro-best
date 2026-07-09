@@ -89,7 +89,7 @@ export default function CartPage() {
         </div>
         <button
           onClick={handleClear}
-          className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-error hover:bg-error/5 rounded-xl transition-colors"
+          className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-error hover:bg-error/5 rounded-xl transition-colors"
         >
           <Trash2 className="w-4 h-4" />
           Vaciar carrito
