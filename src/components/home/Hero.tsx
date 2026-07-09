@@ -6,10 +6,10 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const slides = [
-  { image: "/hero/banner1.png" },
-  { image: "/hero/banner2.png" },
-  { image: "/hero/banner3.png" },
-  { image: "/hero/banner1.png" },
+  { image: "/hero/banner1.webp" },
+  { image: "/hero/banner2.webp" },
+  { image: "/hero/banner3.webp" },
+  { image: "/hero/banner1.webp" },
 ];
 
 export default function Hero() {

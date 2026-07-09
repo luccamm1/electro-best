@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ShoppingCart, Heart, Eye } from "lucide-react";
 import Link from "next/link";
 import type { Product } from "@/lib/constants";
@@ -49,12 +48,9 @@ function ProductImage({ product }: { product: Product }) {
       <div
         className={`relative w-full h-40 sm:h-44 bg-gradient-to-br ${gradients[product.image] || "from-primary to-primary-light"} flex items-center justify-center overflow-hidden group/img`}
       >
-        <motion.span
-          className="text-5xl sm:text-6xl opacity-90 select-none transition-all duration-500 group-hover/img:scale-110 group-hover/img:rotate-6"
-          whileHover={{ scale: 1.1 }}
-        >
+        <span className="text-5xl sm:text-6xl opacity-90 select-none transition-all duration-500 group-hover/img:scale-110 group-hover/img:rotate-6">
           {icons[product.image] || "📦"}
-        </motion.span>
+        </span>
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300" />
         <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/20" />
       </div>
@@ -69,29 +65,20 @@ export default function ProductCard({ product, index = 0, animated = true }: Pro
     `$${price.toLocaleString("es-AR")}`;
 
   return (
-    <motion.div
-      {...(animated
-        ? {
-            initial: { opacity: 0, y: 30 },
-            whileInView: { opacity: 1, y: 0 },
-            viewport: { once: true },
-            transition: { duration: 0.5, delay: index * 0.08, ease: [0.25, 0.46, 0.45, 0.94] },
-          }
-        : {})}
-      className="group bg-white rounded-2xl overflow-hidden shadow-md hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-primary/15 transition-all duration-500 border border-border/50 hover:border-primary/20 flex flex-col"
+    <div
+      className={`group bg-white rounded-2xl overflow-hidden shadow-md hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-primary/15 transition-all duration-500 border border-border/50 hover:border-primary/20 flex flex-col ${
+        animated ? "animate-fade-up" : ""
+      }`}
+      style={animated ? { animationDelay: `${index * 80}ms` } : undefined}
     >
       <div className="relative overflow-hidden">
         <ProductImage product={product} />
         {product.isOffer && (
-          <motion.div
-            initial={{ x: -60 }}
-            animate={{ x: 0 }}
-            className="absolute top-4 left-4 z-10"
-          >
+          <div className="absolute top-4 left-4 z-10 animate-slide-in">
             <Badge variant="offer">
               {product.discount ? `${product.discount}% OFF` : "OFERTA"}
             </Badge>
-          </motion.div>
+          </div>
         )}
         <button className="absolute top-4 right-4 z-10 p-2.5 bg-white/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110 shadow-lg">
           <Heart className="w-4 h-4 text-text-muted hover:text-error transition-colors" />
@@ -149,6 +136,6 @@ export default function ProductCard({ product, index = 0, animated = true }: Pro
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }

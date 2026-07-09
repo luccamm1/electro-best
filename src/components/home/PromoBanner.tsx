@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { CreditCard, ArrowRight, Sparkles } from "lucide-react";
 import Button from "@/components/ui/Button";
 
@@ -8,13 +5,7 @@ export default function PromoBanner() {
   return (
     <section className="py-20 sm:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="relative overflow-hidden bg-gradient-to-r from-primary via-primary-light to-primary rounded-3xl sm:rounded-4xl"
-        >
+        <div className="relative overflow-hidden bg-gradient-to-r from-primary via-primary-light to-primary rounded-3xl sm:rounded-4xl animate-fade-in-up">
           <div className="absolute inset-0 opacity-20">
             <div className="absolute -top-24 -right-24 w-96 h-96 bg-secondary rounded-full blur-3xl" />
             <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-white rounded-full blur-3xl" />
@@ -47,7 +38,7 @@ export default function PromoBanner() {
               <ArrowRight className="w-5 h-5" />
             </Button>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
