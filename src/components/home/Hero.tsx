@@ -14,7 +14,7 @@ const heroSlides = [
     description: siteConfig.slogan,
     cta: { text: "Ver productos", href: "/" },
     ctaOutline: { text: "Contactanos por WhatsApp", href: siteConfig.social.whatsapp },
-    bg: "from-primary-dark via-[#0D3F99] to-primary-light",
+    image: "/hero/banner1.png",
   },
   {
     badge: { icon: CreditCard, text: "Promoción especial" },
@@ -22,7 +22,7 @@ const heroSlides = [
     subtitle: "en todos los productos seleccionados",
     description: "En todos los productos seleccionados con tarjetas de crédito bancarias",
     cta: { text: "Aprovechar ofertas", href: "/" },
-    bg: "from-[#082B6B] via-[#0B3D91] to-[#1E5AB5]",
+    image: "/hero/banner2.png",
   },
   {
     badge: { icon: Truck, text: "Envío garantizado" },
@@ -30,7 +30,7 @@ const heroSlides = [
     subtitle: "rápido y seguro",
     description: "Recibí tu producto donde quieras, rápido y seguro sin costo adicional",
     cta: { text: "Consultar por WhatsApp", href: siteConfig.social.whatsapp },
-    bg: "from-[#0B3D91] via-[#0F4AA8] to-[#2563EB]",
+    image: "/hero/banner3.png",
   },
   {
     badge: { icon: ShieldCheck, text: "Compra segura" },
@@ -38,7 +38,7 @@ const heroSlides = [
     subtitle: "100% confiable",
     description: "Trabajamos solo con marcas oficiales y garantía real para tu tranquilidad",
     cta: { text: "Ver productos", href: "/" },
-    bg: "from-[#1E40AF] via-primary to-[#1E5AB5]",
+    image: "/hero/banner1.png",
   },
 ];
 
@@ -72,21 +72,12 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.6 }}
-          className={`absolute inset-0 bg-gradient-to-br ${slide.bg}`}
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${slide.image})` }}
         />
       </AnimatePresence>
 
-      <div className="absolute inset-0 opacity-[0.04]">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 25% 25%, white 1px, transparent 1px), radial-gradient(circle at 75% 75%, white 1px, transparent 1px)`,
-          backgroundSize: '60px 60px',
-        }} />
-      </div>
-
-      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
-
-      <div className="absolute top-20 left-1/4 w-72 h-72 bg-secondary/5 rounded-full blur-[120px]" />
-      <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-white/[0.03] rounded-full blur-[120px]" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/20" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-32 w-full">
         <AnimatePresence mode="wait">
