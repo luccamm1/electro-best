@@ -81,10 +81,10 @@ export default function BrandsCarousel() {
         >
           <button
             onClick={goPrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 sm:-translate-x-5 z-20 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white shadow-lg border border-border/50 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 active:scale-95"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 sm:-translate-x-5 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white shadow-sm border border-border/50 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 active:scale-95"
             aria-label="Anterior"
           >
-            <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
           <div className="overflow-hidden mx-2 sm:mx-4">
@@ -107,7 +107,7 @@ export default function BrandsCarousel() {
                   ref={index === 0 ? cardRef : undefined}
                   className="shrink-0 w-[180px] sm:w-[220px]"
                 >
-                  <div className="flex items-center justify-center h-28 sm:h-32 bg-white rounded-2xl border border-border/50 shadow-sm hover:shadow-md hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300 group">
+                  <div className="flex items-center justify-center h-28 sm:h-32 bg-white rounded-2xl border border-border/30 shadow-sm hover:shadow-md hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300 group">
                     <span className="text-xl sm:text-2xl font-bold text-text-muted group-hover:text-primary transition-colors">
                       {brand}
                     </span>
@@ -119,10 +119,10 @@ export default function BrandsCarousel() {
 
           <button
             onClick={goNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 sm:translate-x-5 z-20 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white shadow-lg border border-border/50 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 active:scale-95"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 sm:translate-x-5 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white shadow-sm border border-border/50 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 active:scale-95"
             aria-label="Siguiente"
           >
-            <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
           <div className="flex justify-center gap-3 mt-10">
@@ -130,9 +130,9 @@ export default function BrandsCarousel() {
               <button
                 key={i}
                 onClick={() => setCurrentIndex(i)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                   i === currentIndex % brands.length
-                    ? "bg-primary w-8"
+                    ? "bg-primary w-7"
                     : "bg-border hover:bg-primary/40"
                 }`}
                 aria-label={`Slide ${i + 1}`}

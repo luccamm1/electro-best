@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingCart, Heart, Eye } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import type { Product } from "@/lib/constants";
 import Badge from "./Badge";
@@ -28,35 +28,10 @@ const gradients: Record<string, string> = {
 };
 
 const icons: Record<string, string> = {
-  tv: "📺",
-  phone: "📱",
-  speaker: "🔊",
-  fridge: "❄️",
-  laptop: "💻",
-  stove: "🍳",
-  ac: "❄️",
-  blender: "🥤",
-  freezer: "🧊",
-  oven: "🔥",
-  heater: "🌡️",
-  fan: "🌀",
+  tv: "📺", phone: "📱", speaker: "🔊", fridge: "❄️",
+  laptop: "💻", stove: "🍳", ac: "❄️", blender: "🥤",
+  freezer: "🧊", oven: "🔥", heater: "🌡️", fan: "🌀",
 };
-
-function ProductImage({ product }: { product: Product }) {
-  return (
-    <Link href={`/productos/${product.id}`}>
-      <div
-        className={`relative w-full h-40 sm:h-44 bg-gradient-to-br ${gradients[product.image] || "from-primary to-primary-light"} flex items-center justify-center overflow-hidden group/img`}
-      >
-        <span className="text-5xl sm:text-6xl opacity-90 select-none transition-all duration-500 group-hover/img:scale-110 group-hover/img:rotate-6">
-          {icons[product.image] || "📦"}
-        </span>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300" />
-        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/20" />
-      </div>
-    </Link>
-  );
-}
 
 export default function ProductCard({ product, index = 0, animated = true }: ProductCardProps) {
   const { addItem } = useCart();
@@ -66,35 +41,36 @@ export default function ProductCard({ product, index = 0, animated = true }: Pro
 
   return (
     <div
-      className={`group bg-white rounded-2xl overflow-hidden shadow-md hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-primary/15 transition-all duration-500 border border-border/50 hover:border-primary/20 flex flex-col ${
+      className={`group bg-white rounded-2xl overflow-hidden shadow-sm hover:-translate-y-1 hover:shadow-md transition-all duration-300 border border-border/50 flex flex-col ${
         animated ? "animate-fade-up" : ""
       }`}
       style={animated ? { animationDelay: `${index * 80}ms` } : undefined}
     >
       <div className="relative overflow-hidden">
-        <ProductImage product={product} />
+        <Link href={`/productos/${product.id}`}>
+          <div
+            className={`relative w-full h-40 sm:h-44 bg-gradient-to-br ${gradients[product.image] || "from-primary to-primary-light"} flex items-center justify-center overflow-hidden`}
+          >
+            <span className="text-5xl sm:text-6xl opacity-90 select-none transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
+              {icons[product.image] || "📦"}
+            </span>
+            <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/20" />
+          </div>
+        </Link>
         {product.isOffer && (
-          <div className="absolute top-4 left-4 z-10 animate-slide-in">
+          <div className="absolute top-3 left-3 z-10">
             <Badge variant="offer">
               {product.discount ? `${product.discount}% OFF` : "OFERTA"}
             </Badge>
           </div>
         )}
-        <button className="absolute top-4 right-4 z-10 p-2.5 bg-white/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110 shadow-lg">
-          <Heart className="w-4 h-4 text-text-muted hover:text-error transition-colors" />
-        </button>
       </div>
 
-      <Link href={`/productos/${product.id}`} className="p-3 sm:p-4 flex flex-col flex-1">
-        <div className="flex items-center justify-between mb-1.5">
-          <span className="text-[10px] text-text-muted font-bold uppercase tracking-[0.15em]">
-            {product.brand}
-          </span>
-          <span className="text-[9px] text-text-muted/60 bg-bg-alt px-1.5 py-0.5 rounded-full">
-            {product.category}
-          </span>
-        </div>
-        <h3 className="font-bold text-text text-xs sm:text-sm leading-snug mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+      <div className="p-4 flex flex-col flex-1">
+        <span className="text-[10px] text-text-muted font-bold uppercase tracking-wider mb-1">
+          {product.brand}
+        </span>
+        <h3 className="font-bold text-text text-sm leading-snug mb-2 line-clamp-2 group-hover:text-primary transition-colors">
           {product.name}
         </h3>
 
@@ -115,27 +91,23 @@ export default function ProductCard({ product, index = 0, animated = true }: Pro
             {formatPrice(product.price)}
           </p>
 
-          <div className="grid grid-cols-2 gap-2">
+          <div className="flex flex-col gap-2">
             <Link
               href={`/productos/${product.id}`}
-              className="col-span-2 flex items-center justify-center gap-1.5 bg-primary text-white py-3 rounded-xl font-bold text-xs hover:bg-primary-light transition-all duration-200 shadow-md shadow-primary/20 active:scale-[0.98]"
+              className="flex items-center justify-center py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary-light transition-all duration-200 shadow-sm active:scale-[0.97]"
             >
-              <Eye className="w-3.5 h-3.5" />
               Ver detalle
             </Link>
             <button
-              onClick={(e) => {
-                e.preventDefault();
-                addItem(product);
-              }}
-              className="col-span-2 flex items-center justify-center gap-1.5 py-3 rounded-xl border border-border text-text font-semibold text-xs hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-200 active:scale-[0.98]"
+              onClick={() => addItem(product)}
+              className="flex items-center justify-center gap-1.5 py-3 rounded-xl border border-border text-text font-semibold text-sm hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-200 active:scale-[0.97]"
             >
-              <ShoppingCart className="w-3.5 h-3.5" />
+              <ShoppingCart className="w-4 h-4" />
               Agregar
             </button>
           </div>
         </div>
-      </Link>
+      </div>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { motion, useMotionValue } from "framer-motion";
 import { categories } from "@/lib/constants";
 import SectionTitle from "@/components/ui/SectionTitle";
 
-const CARD_WIDTH = 176;
+const CARD_WIDTH = 200;
 const GAP = 24;
 const TOTAL_WIDTH = (CARD_WIDTH + GAP) * categories.length;
 
@@ -69,7 +69,7 @@ export default function Categories() {
 
         <motion.div
           style={{ x: xMotion, touchAction: "pan-y" }}
-          className="flex gap-5 sm:gap-6 items-center cursor-grab active:cursor-grabbing select-none will-change-transform"
+          className="flex gap-6 items-center cursor-grab active:cursor-grabbing select-none will-change-transform"
           onPointerDown={(e) => startDrag(e.clientX)}
           onPointerMove={(e) => moveDrag(e.clientX)}
           onPointerUp={endDrag}
@@ -84,15 +84,17 @@ export default function Categories() {
               onClick={(e) => {
                 if (dragDistRef.current > 5) e.preventDefault();
               }}
-              className="group shrink-0 flex flex-col items-center text-center"
+              className="group shrink-0 block"
               style={{ width: CARD_WIDTH }}
             >
-              <span className="text-3xl sm:text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">
-                {cat.icon}
-              </span>
-              <h3 className="font-bold text-text text-sm sm:text-base group-hover:text-primary transition-colors">
-                {cat.name}
-              </h3>
+              <div className="flex flex-col items-center text-center p-5 bg-white rounded-2xl border border-border/50 shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-primary/20 transition-all duration-300">
+                <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                  {cat.icon}
+                </span>
+                <h3 className="font-semibold text-text text-sm group-hover:text-primary transition-colors">
+                  {cat.name}
+                </h3>
+              </div>
             </a>
           ))}
         </motion.div>

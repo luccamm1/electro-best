@@ -36,7 +36,7 @@ const brandEntries = Object.entries(grouped);
 
 export default function FeaturedProducts() {
   return (
-    <section className="relative py-24 sm:py-28 pb-24 sm:pb-32 bg-bg-alt">
+    <section className="relative py-24 sm:py-28 bg-bg-alt">
       <div className="absolute inset-0 opacity-[0.02]">
         <div className="absolute inset-0" style={{
           backgroundImage: `radial-gradient(circle at 50% 50%, currentColor 1px, transparent 1px)`,
@@ -81,11 +81,7 @@ export default function FeaturedProducts() {
             ¿No encontraste lo que buscabas? Tenemos más productos esperándote
           </p>
           <Link href="/productos">
-            <Button
-              variant="primary"
-              size="lg"
-              className="!px-8 sm:!px-10 !py-5 sm:!py-6 !text-sm sm:!text-base !shadow-xl !shadow-primary/25 hover:!shadow-primary/30"
-            >
+            <Button variant="primary" size="lg">
               Ver todos los productos
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>

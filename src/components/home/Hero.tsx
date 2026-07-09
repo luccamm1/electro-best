@@ -62,10 +62,10 @@ export default function Hero() {
     >
       <button
         onClick={goPrev}
-        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/25 hover:bg-black/45 text-white flex items-center justify-center transition-all duration-200 backdrop-blur-sm active:scale-95"
+        className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all duration-200 backdrop-blur-sm active:scale-90"
         aria-label="Anterior"
       >
-        <ChevronLeft className="w-5 h-5" />
+        <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
       </button>
 
       <div className="absolute inset-0">
@@ -99,21 +99,21 @@ export default function Hero() {
 
       <button
         onClick={goNext}
-        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/25 hover:bg-black/45 text-white flex items-center justify-center transition-all duration-200 backdrop-blur-sm active:scale-95"
+        className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all duration-200 backdrop-blur-sm active:scale-90"
         aria-label="Siguiente"
       >
-        <ChevronRight className="w-5 h-5" />
+        <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
       </button>
 
-      <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+      <div className="absolute bottom-5 sm:bottom-8 left-1/2 -translate-x-1/2 flex gap-2.5 z-20">
         {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrentIndex(i)}
             className={`rounded-full transition-all duration-300 ${
               i === currentIndex
-                ? "bg-secondary w-6 h-2.5"
-                : "bg-white/40 hover:bg-white/60 w-2.5 h-2.5"
+                ? "bg-secondary w-6 h-2"
+                : "bg-white/30 hover:bg-white/50 w-2 h-2"
             }`}
           />
         ))}

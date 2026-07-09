@@ -80,29 +80,29 @@ export default function Header() {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-lg"
+          ? "bg-white/95 backdrop-blur-md shadow-md"
           : "bg-white shadow-sm"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+        <div className="flex items-center justify-between h-14 sm:h-16">
           <button
-            className="lg:hidden relative p-2 -ml-2 rounded-xl hover:bg-bg-alt transition-colors group"
+            className="lg:hidden relative p-2 -ml-2 rounded-xl hover:bg-bg-alt transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-text" />
+              <X className="w-5 h-5 text-text" />
             ) : (
-              <Menu className="w-6 h-6 text-text" />
+              <Menu className="w-5 h-5 text-text" />
             )}
           </button>
 
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-primary to-primary-light rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20">
-              <Zap className="w-6 h-6 sm:w-7 sm:h-7 text-secondary" />
+            <div className="w-9 h-9 sm:w-11 sm:h-11 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center shadow-md shadow-primary/20">
+              <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-secondary" />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg sm:text-2xl font-extrabold text-primary tracking-tight leading-none">
+              <span className="text-base sm:text-xl font-extrabold text-primary tracking-tight leading-none">
                 {siteConfig.name.split(" ")[0]}
                 <span className="text-secondary">
                   {" "}
@@ -115,21 +115,21 @@ export default function Header() {
             </div>
           </Link>
 
-          <div className="hidden md:flex flex-1 mx-4 lg:mx-10">
+          <div className="hidden md:flex flex-1 mx-4 lg:mx-8">
             <SearchBar />
           </div>
 
-          <div className="flex items-center gap-1 sm:gap-2 pr-4 sm:pr-0">
+          <div className="flex items-center gap-1">
             <div ref={cartRef} className="relative">
               <button
                 onClick={() => setIsCartOpen(!isCartOpen)}
-                className="relative p-2.5 sm:p-3 rounded-xl hover:bg-bg-alt transition-colors group"
+                className="relative p-2 sm:p-2.5 rounded-xl hover:bg-bg-alt transition-colors"
               >
-                <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 text-text-muted group-hover:text-primary transition-colors" />
+                <ShoppingCart className="w-5 h-5 text-text-muted hover:text-primary transition-colors" />
                 {itemCount > 0 && (
                   <span
                     key={itemCount}
-                    className="absolute -top-0.5 -right-0.5 min-w-[20px] h-5 bg-secondary text-black text-[11px] font-bold rounded-full flex items-center justify-center px-1 shadow-md animate-scale-in"
+                    className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] bg-secondary text-black text-[10px] font-bold rounded-full flex items-center justify-center px-1 shadow-md animate-scale-in"
                   >
                     {itemCount}
                   </span>
@@ -212,7 +212,7 @@ export default function Header() {
                       {items.length > 0 && (
                         <button
                           onClick={whatsappCheckout}
-                          className="flex-1 flex items-center justify-center gap-1.5 py-3 rounded-xl bg-success text-white text-sm font-bold hover:bg-green-600 transition-all duration-200"
+                          className="flex-1 flex items-center justify-center gap-1.5 py-3 rounded-xl bg-success text-white text-sm font-semibold hover:bg-green-600 transition-all duration-200"
                         >
                           <MessageCircle className="w-4 h-4" />
                           Comprar
@@ -224,13 +224,13 @@ export default function Header() {
               )}
             </div>
 
-            <button className="p-2.5 sm:p-3 rounded-xl hover:bg-bg-alt transition-colors group hidden sm:block">
-              <User className="w-5 h-5 sm:w-6 sm:h-6 text-text-muted group-hover:text-primary transition-colors" />
+            <button className="p-2 sm:p-2.5 rounded-xl hover:bg-bg-alt transition-colors hidden sm:block">
+              <User className="w-5 h-5 text-text-muted hover:text-primary transition-colors" />
             </button>
           </div>
         </div>
 
-        <div className="md:hidden pb-4">
+        <div className="md:hidden pb-3">
           <SearchBar />
         </div>
       </div>

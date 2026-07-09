@@ -13,7 +13,7 @@ export default function SectionTitle({
 }: SectionTitleProps) {
   return (
     <div
-      className={`mb-20 ${
+      className={`mb-16 sm:mb-20 ${
         align === "center" ? "text-center" : "text-left"
       } ${className}`}
     >
@@ -26,7 +26,7 @@ export default function SectionTitle({
         </p>
       )}
       <div
-        className={`w-24 h-1.5 bg-gradient-to-r from-secondary to-secondary-light rounded-full mt-5 ${
+        className={`w-20 h-1 bg-gradient-to-r from-secondary to-secondary-light rounded-full mt-5 ${
           align === "center" ? "mx-auto" : ""
         }`}
       />
