@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Flame } from "lucide-react";
 import { categories } from "@/lib/constants";
 
@@ -42,30 +41,27 @@ export default function Navbar() {
                 }`}
               />
             </button>
-            <AnimatePresence>
-              {isCategoriesOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8, scaleY: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scaleY: 1 }}
-                  exit={{ opacity: 0, y: 8, scaleY: 0.95 }}
-                  transition={{ duration: 0.15, ease: "easeOut" }}
-                  className="absolute top-full left-0 mt-1 w-64 bg-white/95 backdrop-blur-lg rounded-2xl shadow-xl shadow-black/5 border border-border/80 overflow-hidden z-50 origin-top"
-                >
-                  <div className="p-2">
-                    {categories.map((cat) => (
-                      <a
-                        key={cat.id}
-                        href={`/categorias/${cat.slug}`}
-                        className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-text hover:bg-primary/5 hover:text-primary transition-all duration-150"
-                      >
-                        <span className="text-xl">{cat.icon}</span>
-                        {cat.name}
-                      </a>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+
+            <div
+              className={`absolute top-full left-0 mt-1 w-64 bg-white/95 backdrop-blur-lg rounded-2xl shadow-xl shadow-black/5 border border-border/80 overflow-hidden z-50 origin-top transition-all duration-150 ease-out ${
+                isCategoriesOpen
+                  ? "opacity-100 translate-y-0 scale-y-100 pointer-events-auto"
+                  : "opacity-0 -translate-y-1 scale-y-95 pointer-events-none"
+              }`}
+            >
+              <div className="p-2">
+                {categories.map((cat) => (
+                  <a
+                    key={cat.id}
+                    href={`/categorias/${cat.slug}`}
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-text hover:bg-primary/5 hover:text-primary transition-all duration-150"
+                  >
+                    <span className="text-xl">{cat.icon}</span>
+                    {cat.name}
+                  </a>
+                ))}
+              </div>
+            </div>
           </li>
           <li>
             <Link

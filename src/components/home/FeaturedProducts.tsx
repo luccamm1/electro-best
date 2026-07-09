@@ -1,7 +1,3 @@
-"use client";
-
-import { useMemo } from "react";
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { products, brands } from "@/lib/constants";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -22,26 +18,23 @@ const brandIcons: Record<string, string> = {
   BGH: "🌡️",
 };
 
-export default function FeaturedProducts() {
-  const grouped = useMemo(() => {
-    const map: Record<string, typeof products> = {};
-    const brandOrder = brands.filter((b) =>
-      products.some((p) => p.brand === b)
-    );
-    for (const brand of brandOrder) {
-      const brandProducts = products.filter((p) => p.brand === brand);
-      if (brandProducts.length > 0) {
-        map[brand] = brandProducts;
-      }
-    }
-    return map;
-  }, []);
-
-  const brandEntries = useMemo(
-    () => Object.entries(grouped),
-    [grouped]
+const grouped = (() => {
+  const map: Record<string, typeof products> = {};
+  const brandOrder = brands.filter((b) =>
+    products.some((p) => p.brand === b)
   );
+  for (const brand of brandOrder) {
+    const brandProducts = products.filter((p) => p.brand === brand);
+    if (brandProducts.length > 0) {
+      map[brand] = brandProducts;
+    }
+  }
+  return map;
+})();
 
+const brandEntries = Object.entries(grouped);
+
+export default function FeaturedProducts() {
   return (
     <section className="relative py-16 sm:py-20 pb-16 sm:pb-24 bg-bg-alt">
       <div className="absolute inset-0 opacity-[0.02]">
@@ -82,9 +75,7 @@ export default function FeaturedProducts() {
           </div>
         ))}
 
-        <div
-          className="relative mt-16 sm:mt-20 text-center"
-        >
+        <div className="relative mt-16 sm:mt-20 text-center">
           <div className="absolute left-1/2 -translate-x-1/2 -top-6 w-16 h-[2px] bg-gradient-to-r from-primary/20 via-primary to-primary/20 rounded-full" />
           <p className="text-text-muted text-xs sm:text-sm mb-4">
             ¿No encontraste lo que buscabas? Tenemos más productos esperándote

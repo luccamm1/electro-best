@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const slides = [
@@ -60,7 +61,6 @@ export default function Hero() {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Left Arrow */}
       <button
         onClick={goPrev}
         className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/25 hover:bg-black/45 text-white flex items-center justify-center transition-all duration-200 backdrop-blur-sm active:scale-95"
@@ -69,7 +69,6 @@ export default function Hero() {
         <ChevronLeft className="w-5 h-5" />
       </button>
 
-      {/* Track */}
       <div className="absolute inset-0">
         <motion.div
           className="flex h-full"
@@ -85,18 +84,20 @@ export default function Hero() {
         >
           {slides.map((slide, i) => (
             <div key={i} className="w-screen h-full flex-shrink-0 flex items-center justify-center bg-primary-dark">
-              <img
+              <Image
                 src={slide.image}
                 alt=""
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
                 draggable={false}
+                priority={i === 0}
+                sizes="100vw"
               />
             </div>
           ))}
         </motion.div>
       </div>
 
-      {/* Right Arrow */}
       <button
         onClick={goNext}
         className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/25 hover:bg-black/45 text-white flex items-center justify-center transition-all duration-200 backdrop-blur-sm active:scale-95"
@@ -105,7 +106,6 @@ export default function Hero() {
         <ChevronRight className="w-5 h-5" />
       </button>
 
-      {/* Dots */}
       <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
         {slides.map((_, i) => (
           <button
