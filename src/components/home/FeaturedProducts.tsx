@@ -2,9 +2,12 @@
 
 import { useMemo } from "react";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { products, brands } from "@/lib/constants";
 import SectionTitle from "@/components/ui/SectionTitle";
 import BrandCarousel from "@/components/home/BrandCarousel";
+import Button from "@/components/ui/Button";
+import Link from "next/link";
 
 const brandIcons: Record<string, string> = {
   Samsung: "📺",
@@ -83,6 +86,27 @@ export default function FeaturedProducts() {
           </motion.div>
         ))}
 
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative mt-16 sm:mt-20 text-center"
+        >
+          <div className="absolute left-1/2 -translate-x-1/2 -top-6 w-16 h-[2px] bg-gradient-to-r from-primary/20 via-primary to-primary/20 rounded-full" />
+          <p className="text-text-muted text-xs sm:text-sm mb-4">
+            ¿No encontraste lo que buscabas? Tenemos más productos esperándote
+          </p>
+          <Link href="/productos">
+            <Button
+              variant="primary"
+              size="lg"
+              className="!px-8 sm:!px-10 !py-4 sm:!py-5 !text-sm sm:!text-base !shadow-xl !shadow-primary/25 hover:!shadow-primary/30"
+            >
+              Ver todos los productos
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+            </Button>
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
