@@ -9,7 +9,7 @@ const slides = [
   { image: "/hero/banner1.png" },
   { image: "/hero/banner2.png" },
   { image: "/hero/banner3.png" },
-  { image: "/hero/banner1.png" },
+  { image: "/hero/banner4.png" },
 ];
 
 export default function Hero() {
