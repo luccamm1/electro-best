@@ -13,7 +13,7 @@ export default function SectionTitle({
 }: SectionTitleProps) {
   return (
     <div
-      className={`mb-14 ${
+      className={`mb-20 ${
         align === "center" ? "text-center" : "text-left"
       } ${className}`}
     >

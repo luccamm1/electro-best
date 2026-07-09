@@ -18,14 +18,14 @@ const iconMap: Record<string, React.ReactNode> = {
 
 export default function Benefits() {
   return (
-    <section className="py-20 sm:py-28 bg-bg">
+    <section className="py-28 sm:py-36 bg-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
           title="¿Por qué elegirnos?"
           subtitle="Nos comprometemos a brindarte la mejor experiencia de compra"
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
           {benefits.map((benefit) => (
             <div
               key={benefit.id}

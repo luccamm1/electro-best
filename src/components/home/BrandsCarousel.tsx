@@ -3,8 +3,8 @@ import SectionTitle from "@/components/ui/SectionTitle";
 
 export default function BrandsCarousel() {
   return (
-    <section className="py-20 sm:py-24 bg-bg-alt overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+    <section className="py-28 sm:py-36 bg-bg-alt overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <SectionTitle
           title="Marcas que trabajamos"
           subtitle="Las mejores marcas del mercado, todas en un solo lugar"

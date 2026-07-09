@@ -55,8 +55,8 @@ export default function Categories() {
   };
 
   return (
-    <section className="py-20 sm:py-28 bg-bg overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+    <section className="py-28 sm:py-36 bg-bg overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <SectionTitle
           title="Categorías"
           subtitle="Explorá todo lo que tenemos para vos"

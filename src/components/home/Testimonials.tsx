@@ -4,14 +4,14 @@ import SectionTitle from "@/components/ui/SectionTitle";
 
 export default function Testimonials() {
   return (
-    <section className="py-20 sm:py-28 bg-bg">
+    <section className="py-28 sm:py-36 bg-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
           title="Lo que dicen nuestros clientes"
           subtitle="La opinión de quienes ya confiaron en nosotros"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((t) => (
             <div
               key={t.id}

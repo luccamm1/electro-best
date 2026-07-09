@@ -36,7 +36,7 @@ const brandEntries = Object.entries(grouped);
 
 export default function FeaturedProducts() {
   return (
-    <section className="relative py-16 sm:py-20 pb-16 sm:pb-24 bg-bg-alt">
+    <section className="relative py-24 sm:py-28 pb-24 sm:pb-32 bg-bg-alt">
       <div className="absolute inset-0 opacity-[0.02]">
         <div className="absolute inset-0" style={{
           backgroundImage: `radial-gradient(circle at 50% 50%, currentColor 1px, transparent 1px)`,
@@ -53,7 +53,7 @@ export default function FeaturedProducts() {
         {brandEntries.slice(0, 4).map(([brand, brandProducts]) => (
           <div
             key={brand}
-            className="mb-10 sm:mb-14 last:mb-0"
+            className="mb-14 sm:mb-20 last:mb-0"
           >
             <div className="flex items-center gap-2.5 mb-5 sm:mb-6">
               <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg flex items-center justify-center shrink-0">
@@ -75,7 +75,7 @@ export default function FeaturedProducts() {
           </div>
         ))}
 
-        <div className="relative mt-16 sm:mt-20 text-center">
+        <div className="relative mt-20 sm:mt-28 text-center">
           <div className="absolute left-1/2 -translate-x-1/2 -top-6 w-16 h-[2px] bg-gradient-to-r from-primary/20 via-primary to-primary/20 rounded-full" />
           <p className="text-text-muted text-xs sm:text-sm mb-4">
             ¿No encontraste lo que buscabas? Tenemos más productos esperándote
