@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Product } from "@/lib/constants";
@@ -14,34 +14,30 @@ interface BrandCarouselProps {
 }
 
 export default function BrandCarousel({ products, brand }: BrandCarouselProps) {
+  const items = useMemo(() => [...products, ...products], [products]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [cardWidth, setCardWidth] = useState(0);
   const [containerWidth, setContainerWidth] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const snapRef = useRef(false);
 
   const itemsPerView = Math.max(1, Math.floor(containerWidth / (cardWidth + GAP)));
-  const maxIndex = Math.max(0, products.length - itemsPerView);
+  const maxIndex = products.length;
   const slideDistance = cardWidth + GAP;
+  const x = currentIndex * slideDistance;
 
   useEffect(() => {
     const measure = () => {
-      if (containerRef.current) {
-        setContainerWidth(containerRef.current.offsetWidth);
-      }
-      if (cardRef.current) {
-        setCardWidth(cardRef.current.offsetWidth);
-      }
+      if (containerRef.current) setContainerWidth(containerRef.current.offsetWidth);
+      if (cardRef.current) setCardWidth(cardRef.current.offsetWidth);
     };
     measure();
     const ro = new ResizeObserver(measure);
     if (containerRef.current) ro.observe(containerRef.current);
     window.addEventListener("resize", measure);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", measure);
-    };
+    return () => { ro.disconnect(); window.removeEventListener("resize", measure); };
   }, []);
 
   useEffect(() => {
@@ -51,10 +47,6 @@ export default function BrandCarousel({ products, brand }: BrandCarouselProps) {
     }, 5000);
     return () => clearInterval(interval);
   }, [maxIndex, isPaused]);
-
-  useEffect(() => {
-    setCurrentIndex((prev) => Math.min(prev, maxIndex));
-  }, [maxIndex]);
 
   const goNext = useCallback(() => {
     setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
@@ -66,14 +58,18 @@ export default function BrandCarousel({ products, brand }: BrandCarouselProps) {
 
   const handleDragEnd = (_: any, info: any) => {
     const threshold = 50;
-    if (info.offset.x < -threshold) {
-      goNext();
-    } else if (info.offset.x > threshold) {
-      goPrev();
-    }
+    if (info.offset.x < -threshold) goNext();
+    else if (info.offset.x > threshold) goPrev();
   };
 
-  const x = currentIndex * slideDistance;
+  const handleAnimationComplete = () => {
+    if (currentIndex >= products.length) {
+      snapRef.current = true;
+      setCurrentIndex(currentIndex - products.length);
+    } else if (snapRef.current) {
+      snapRef.current = false;
+    }
+  };
 
   if (maxIndex <= 0) {
     return (
@@ -104,7 +100,8 @@ export default function BrandCarousel({ products, brand }: BrandCarouselProps) {
         <motion.div
           className="flex gap-5"
           animate={{ x: -x }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          transition={snapRef.current ? { duration: 0 } : { type: "spring", stiffness: 300, damping: 30 }}
+          onAnimationComplete={handleAnimationComplete}
           drag="x"
           dragConstraints={{
             left: -(maxIndex * slideDistance),
@@ -113,9 +110,9 @@ export default function BrandCarousel({ products, brand }: BrandCarouselProps) {
           dragElastic={0.1}
           onDragEnd={handleDragEnd}
         >
-          {products.map((product, index) => (
+          {items.map((product, index) => (
             <div
-              key={product.id}
+              key={`${product.id}-${index}`}
               ref={index === 0 ? cardRef : undefined}
               className="min-w-[230px] sm:min-w-[250px] lg:min-w-[240px] xl:min-w-[260px] flex-shrink-0"
             >
@@ -133,22 +130,20 @@ export default function BrandCarousel({ products, brand }: BrandCarouselProps) {
         <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
       </button>
 
-      {maxIndex > 0 && (
-        <div className="flex justify-center gap-2 mt-6">
-          {Array.from({ length: maxIndex + 1 }).map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentIndex(i)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                i === currentIndex
-                  ? "bg-primary w-6"
-                  : "bg-border hover:bg-primary/40"
-              }`}
-              aria-label={`${brand} slide ${i + 1}`}
-            />
-          ))}
-        </div>
-      )}
+      <div className="flex justify-center gap-2 mt-6">
+        {Array.from({ length: products.length }).map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrentIndex(i)}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              i === currentIndex % products.length
+                ? "bg-primary w-6"
+                : "bg-border hover:bg-primary/40"
+            }`}
+            aria-label={`${brand} slide ${i + 1}`}
+          />
+        ))}
+      </div>
     </div>
   );
 }
