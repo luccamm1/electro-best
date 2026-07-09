@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { brands } from "@/lib/constants";
 import SectionTitle from "@/components/ui/SectionTitle";
 
-const GAP = 32;
+const GAP = 24;
 
 export default function BrandsCarousel() {
   const items = [...brands, ...brands];
@@ -105,10 +105,10 @@ export default function BrandsCarousel() {
                 <div
                   key={`${brand}-${index}`}
                   ref={index === 0 ? cardRef : undefined}
-                  className="shrink-0 min-w-[160px]"
+                  className="shrink-0 w-[180px] sm:w-[220px]"
                 >
-                  <div className="px-10 sm:px-14 py-6 sm:py-8 bg-white rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group">
-                    <span className="text-xl sm:text-2xl font-bold text-text-muted group-hover:text-primary transition-colors whitespace-nowrap">
+                  <div className="flex items-center justify-center h-28 sm:h-32 bg-white rounded-2xl border border-border/50 shadow-sm hover:shadow-md hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300 group">
+                    <span className="text-xl sm:text-2xl font-bold text-text-muted group-hover:text-primary transition-colors">
                       {brand}
                     </span>
                   </div>
