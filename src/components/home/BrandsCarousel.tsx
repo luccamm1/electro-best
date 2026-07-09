@@ -81,15 +81,15 @@ export default function BrandsCarousel() {
         >
           <button
             onClick={goPrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 sm:-translate-x-5 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white shadow-lg border border-border/50 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 active:scale-95"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 sm:-translate-x-5 z-20 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white shadow-lg border border-border/50 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 active:scale-95"
             aria-label="Anterior"
           >
-            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+            <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
           </button>
 
           <div className="overflow-hidden mx-2 sm:mx-4">
             <motion.div
-              className="flex gap-8 sm:gap-12"
+              className="flex gap-10 sm:gap-16"
               animate={{ x: -x }}
               transition={snapRef.current ? { duration: 0 } : { type: "spring", stiffness: 300, damping: 30 }}
               onAnimationComplete={handleAnimationComplete}
@@ -105,10 +105,10 @@ export default function BrandsCarousel() {
                 <div
                   key={`${brand}-${index}`}
                   ref={index === 0 ? cardRef : undefined}
-                  className="shrink-0"
+                  className="shrink-0 min-w-[160px]"
                 >
-                  <div className="px-8 sm:px-10 py-5 sm:py-6 bg-white rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group">
-                    <span className="text-lg sm:text-xl font-bold text-text-muted group-hover:text-primary transition-colors whitespace-nowrap">
+                  <div className="px-10 sm:px-14 py-6 sm:py-8 bg-white rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group">
+                    <span className="text-xl sm:text-2xl font-bold text-text-muted group-hover:text-primary transition-colors whitespace-nowrap">
                       {brand}
                     </span>
                   </div>
@@ -119,20 +119,20 @@ export default function BrandsCarousel() {
 
           <button
             onClick={goNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 sm:translate-x-5 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white shadow-lg border border-border/50 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 active:scale-95"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 sm:translate-x-5 z-20 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white shadow-lg border border-border/50 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 active:scale-95"
             aria-label="Siguiente"
           >
-            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+            <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
           </button>
 
-          <div className="flex justify-center gap-2 mt-8">
+          <div className="flex justify-center gap-3 mt-10">
             {brands.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrentIndex(i)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   i === currentIndex % brands.length
-                    ? "bg-primary w-6"
+                    ? "bg-primary w-8"
                     : "bg-border hover:bg-primary/40"
                 }`}
                 aria-label={`Slide ${i + 1}`}
