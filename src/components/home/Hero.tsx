@@ -87,7 +87,7 @@ export default function Hero() {
                 src={slide.image}
                 alt=""
                 fill
-                className="object-cover"
+                className="object-contain"
                 draggable={false}
                 priority={i === 0}
                 sizes="100vw"
