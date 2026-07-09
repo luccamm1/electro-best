@@ -2,12 +2,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ShoppingCart,
   User,
   Menu,
   X,
-  Zap,
   Home,
   Package,
   Tag,
@@ -97,22 +97,15 @@ export default function Header() {
             )}
           </button>
 
-          <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="w-9 h-9 sm:w-11 sm:h-11 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center shadow-md shadow-primary/20">
-              <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-secondary" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-base sm:text-xl font-extrabold text-primary tracking-tight leading-none">
-                {siteConfig.name.split(" ")[0]}
-                <span className="text-secondary">
-                  {" "}
-                  {siteConfig.name.split(" ")[1]}
-                </span>
-              </span>
-              <span className="hidden sm:block text-[10px] text-text-muted font-medium tracking-wider uppercase">
-                Tecnología & Electrodomésticos
-              </span>
-            </div>
+          <Link href="/" className="flex items-center shrink-0">
+            <Image
+              src="/electro-logo.png"
+              alt="Electro Best"
+              width={140}
+              height={40}
+              className="h-8 sm:h-10 w-auto"
+              priority
+            />
           </Link>
 
           <div className="hidden md:flex flex-1 mx-4 lg:mx-8">

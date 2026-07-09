@@ -1,6 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
-  Zap,
   Phone,
   Mail,
   MapPin,
@@ -34,14 +34,15 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           <div>
-            <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
-                <Zap className="w-6 h-6 text-secondary" />
-              </div>
-              <span className="text-xl font-extrabold tracking-tight">
-                ELECTRO{" "}
-                <span className="text-secondary">BEST</span>
-              </span>
+            <Link href="/" className="flex items-center mb-6">
+              <Image
+                src="/electro-logo.png"
+                alt="Electro Best"
+                width={160}
+                height={45}
+                className="h-10 w-auto brightness-0 invert"
+                priority
+              />
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-6">
               {siteConfig.description}
