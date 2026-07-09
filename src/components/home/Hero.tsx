@@ -14,17 +14,13 @@ const slides = [
 export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [viewWidth, setViewWidth] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [slideWidth, setSlideWidth] = useState(0);
 
   const maxIndex = slides.length - 1;
 
   useEffect(() => {
-    const measure = () => {
-      if (containerRef.current) {
-        setSlideWidth(containerRef.current.offsetWidth);
-      }
-    };
+    const measure = () => setViewWidth(window.innerWidth);
     measure();
     const ro = new ResizeObserver(measure);
     if (containerRef.current) ro.observe(containerRef.current);
@@ -59,7 +55,8 @@ export default function Hero() {
 
   return (
     <section
-      className="relative w-full h-[40vh] sm:h-[50vh] lg:h-[70vh] overflow-hidden bg-primary-dark"
+      ref={containerRef}
+      className="relative w-full min-h-[35vh] sm:min-h-[45vh] lg:min-h-[65vh] overflow-hidden bg-primary-dark select-none"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -73,25 +70,26 @@ export default function Hero() {
       </button>
 
       {/* Track */}
-      <div ref={containerRef} className="w-full h-full">
+      <div className="absolute inset-0">
         <motion.div
           className="flex h-full"
-          animate={{ x: -(currentIndex * slideWidth) }}
+          animate={{ x: -(currentIndex * viewWidth) }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           drag="x"
           dragConstraints={{
-            left: -(maxIndex * slideWidth),
+            left: -(maxIndex * viewWidth),
             right: 0,
           }}
           dragElastic={0.1}
           onDragEnd={handleDragEnd}
         >
           {slides.map((slide, i) => (
-            <div key={i} className="min-w-full h-full flex-shrink-0">
+            <div key={i} className="w-screen h-full flex-shrink-0 flex items-center justify-center bg-primary-dark">
               <img
                 src={slide.image}
                 alt=""
-                className="w-full h-full object-contain sm:object-cover"
+                className="w-full h-full object-cover"
+                draggable={false}
               />
             </div>
           ))}
@@ -108,7 +106,7 @@ export default function Hero() {
       </button>
 
       {/* Dots */}
-      <div className="absolute bottom-4 sm:bottom-10 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+      <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
         {slides.map((_, i) => (
           <button
             key={i}
@@ -116,7 +114,7 @@ export default function Hero() {
             className={`rounded-full transition-all duration-300 ${
               i === currentIndex
                 ? "bg-secondary w-6 h-2.5"
-                : "bg-white/30 hover:bg-white/50 w-2.5 h-2.5"
+                : "bg-white/40 hover:bg-white/60 w-2.5 h-2.5"
             }`}
           />
         ))}
