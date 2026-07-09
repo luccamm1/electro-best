@@ -75,7 +75,7 @@ export default function BrandCarousel({ products, brand }: BrandCarouselProps) {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
         {products.map((product, index) => (
-          <ProductCard key={product.id} product={product} index={index} />
+          <ProductCard key={product.id} product={product} index={index} animated={false} />
         ))}
       </div>
     );
@@ -116,7 +116,7 @@ export default function BrandCarousel({ products, brand }: BrandCarouselProps) {
               ref={index === 0 ? cardRef : undefined}
               className="min-w-[230px] sm:min-w-[250px] lg:min-w-[240px] xl:min-w-[260px] flex-shrink-0"
             >
-              <ProductCard product={product} index={index} />
+              <ProductCard product={product} index={index} animated={false} />
             </div>
           ))}
         </motion.div>
