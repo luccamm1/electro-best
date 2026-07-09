@@ -1,5 +1,3 @@
-"use client";
-
 import { products } from "@/lib/constants";
 import SectionTitle from "@/components/ui/SectionTitle";
 import ProductCard from "@/components/ui/ProductCard";
