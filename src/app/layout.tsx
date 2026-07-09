@@ -5,6 +5,7 @@ import TopBar from "@/components/layout/TopBar";
 import Header from "@/components/layout/Header";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import { CartProvider } from "@/lib/cart-context";
 
 const inter = Inter({
@@ -52,6 +53,7 @@ export default function RootLayout({
           <Header />
           <Navbar />
           <main className="flex-1">{children}</main>
+          <WhatsAppButton />
           <Footer />
         </CartProvider>
       </body>
