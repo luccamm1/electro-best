@@ -10,9 +10,30 @@ const gap = 24;
 const totalCards = categories.length;
 const totalWidth = (cardWidth + gap) * totalCards;
 
+function resumeAnimation(controls: ReturnType<typeof useAnimation>, offsetRef: React.MutableRefObject<number>, totalWidth: number) {
+  const from = offsetRef.current;
+  controls.start({
+    x: [from, from - totalWidth],
+    transition: {
+      duration: 25,
+      ease: "linear",
+      repeat: Infinity,
+      repeatDelay: 0,
+      onUpdate: (latest: number) => {
+        offsetRef.current = latest;
+        if (latest < -totalWidth * 2) {
+          offsetRef.current += totalWidth;
+          controls.set({ x: offsetRef.current });
+        }
+      },
+    },
+  });
+}
+
 export default function Categories() {
   const trackRef = useRef<HTMLDivElement>(null);
   const controls = useAnimation();
+  const offsetRef = useRef(0);
   const [isDragging, setIsDragging] = useState(false);
   const [containerWidth, setContainerWidth] = useState(0);
 
@@ -29,21 +50,15 @@ export default function Categories() {
 
   useEffect(() => {
     if (isDragging || containerWidth === 0) return;
-    const distance = totalWidth;
-    const duration = 25;
-
-    controls.start({
-      x: [-distance, 0],
-      transition: {
-        duration,
-        ease: "linear",
-        repeat: Infinity,
-        repeatDelay: 0,
-      },
-    });
+    resumeAnimation(controls, offsetRef, totalWidth);
   }, [controls, isDragging, containerWidth]);
 
   const duplicated = [...categories, ...categories, ...categories, ...categories];
+
+  const handleDragEnd = () => {
+    setIsDragging(false);
+    resumeAnimation(controls, offsetRef, totalWidth);
+  };
 
   return (
     <section className="py-20 sm:py-28 bg-bg overflow-hidden">
@@ -64,10 +79,7 @@ export default function Categories() {
           onMouseEnter={() => controls.stop()}
           onMouseLeave={() => {
             if (!isDragging) {
-              controls.start({
-                x: [-totalWidth, 0],
-                transition: { duration: 25, ease: "linear", repeat: Infinity, repeatDelay: 0 },
-              });
+              resumeAnimation(controls, offsetRef, totalWidth);
             }
           }}
         >
@@ -78,13 +90,10 @@ export default function Categories() {
               right: 0,
             }}
             onDragStart={() => setIsDragging(true)}
-            onDragEnd={() => {
-              setIsDragging(false);
-              controls.start({
-                x: [-totalWidth, 0],
-                transition: { duration: 25, ease: "linear", repeat: Infinity, repeatDelay: 0 },
-              });
+            onDrag={(_, info) => {
+              offsetRef.current = info.offset.x;
             }}
+            onDragEnd={handleDragEnd}
             animate={controls}
             className="flex gap-5 sm:gap-6 items-center"
             style={{ width: "max-content", x: 0 }}
