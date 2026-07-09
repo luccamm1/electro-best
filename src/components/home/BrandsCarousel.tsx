@@ -1,7 +1,68 @@
+"use client";
+
+import { useState, useEffect, useRef, useCallback } from "react";
+import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { brands } from "@/lib/constants";
 import SectionTitle from "@/components/ui/SectionTitle";
 
+const GAP = 32;
+
 export default function BrandsCarousel() {
+  const items = [...brands, ...brands];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [cardWidth, setCardWidth] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const snapRef = useRef(false);
+
+  const maxIndex = brands.length;
+  const slideDistance = cardWidth + GAP;
+  const x = currentIndex * slideDistance;
+
+  useEffect(() => {
+    const measure = () => {
+      if (cardRef.current) setCardWidth(cardRef.current.offsetWidth);
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    if (containerRef.current) ro.observe(containerRef.current);
+    window.addEventListener("resize", measure);
+    return () => { ro.disconnect(); window.removeEventListener("resize", measure); };
+  }, []);
+
+  useEffect(() => {
+    if (isPaused || maxIndex <= 0) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [maxIndex, isPaused]);
+
+  const goNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  }, [maxIndex]);
+
+  const goPrev = useCallback(() => {
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  }, [maxIndex]);
+
+  const handleDragEnd = (_: any, info: any) => {
+    const threshold = 50;
+    if (info.offset.x < -threshold) goNext();
+    else if (info.offset.x > threshold) goPrev();
+  };
+
+  const handleAnimationComplete = () => {
+    if (currentIndex >= brands.length) {
+      snapRef.current = true;
+      setCurrentIndex(currentIndex - brands.length);
+    } else if (snapRef.current) {
+      snapRef.current = false;
+    }
+  };
+
   return (
     <section className="py-28 sm:py-36 bg-bg-alt overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
@@ -11,21 +72,71 @@ export default function BrandsCarousel() {
         />
       </div>
 
-      <div className="relative">
-        <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-r from-bg-alt to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-l from-bg-alt to-transparent z-10" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          ref={containerRef}
+          className="relative"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <button
+            onClick={goPrev}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 sm:-translate-x-5 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white shadow-lg border border-border/50 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 active:scale-95"
+            aria-label="Anterior"
+          >
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+          </button>
 
-        <div className="flex">
-          <div className="flex gap-12 sm:gap-20 items-center animate-scroll">
-            {[...brands, ...brands].map((brand, i) => (
-              <div
+          <div className="overflow-hidden mx-2 sm:mx-4">
+            <motion.div
+              className="flex gap-8 sm:gap-12"
+              animate={{ x: -x }}
+              transition={snapRef.current ? { duration: 0 } : { type: "spring", stiffness: 300, damping: 30 }}
+              onAnimationComplete={handleAnimationComplete}
+              drag="x"
+              dragConstraints={{
+                left: -(maxIndex * slideDistance),
+                right: 0,
+              }}
+              dragElastic={0.1}
+              onDragEnd={handleDragEnd}
+            >
+              {items.map((brand, index) => (
+                <div
+                  key={`${brand}-${index}`}
+                  ref={index === 0 ? cardRef : undefined}
+                  className="shrink-0"
+                >
+                  <div className="px-8 sm:px-10 py-5 sm:py-6 bg-white rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group">
+                    <span className="text-lg sm:text-xl font-bold text-text-muted group-hover:text-primary transition-colors whitespace-nowrap">
+                      {brand}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          <button
+            onClick={goNext}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 sm:translate-x-5 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white shadow-lg border border-border/50 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 active:scale-95"
+            aria-label="Siguiente"
+          >
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+          </button>
+
+          <div className="flex justify-center gap-2 mt-8">
+            {brands.map((_, i) => (
+              <button
                 key={i}
-                className="shrink-0 px-7 sm:px-9 py-5 bg-white rounded-2xl border border-border/50 shadow-sm hover:shadow-md hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300 group"
-              >
-                <span className="text-lg sm:text-xl font-bold text-text-muted group-hover:text-primary transition-colors whitespace-nowrap">
-                  {brand}
-                </span>
-              </div>
+                onClick={() => setCurrentIndex(i)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  i === currentIndex % brands.length
+                    ? "bg-primary w-6"
+                    : "bg-border hover:bg-primary/40"
+                }`}
+                aria-label={`Slide ${i + 1}`}
+              />
             ))}
           </div>
         </div>
