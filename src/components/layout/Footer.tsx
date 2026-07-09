@@ -38,9 +38,9 @@ export default function Footer() {
               <Image
                 src="/electro-logo.png"
                 alt="Electro Best"
-                width={160}
-                height={45}
-                className="h-10 w-auto brightness-0 invert"
+                width={200}
+                height={55}
+                className="h-12 w-auto"
                 priority
               />
             </Link>
