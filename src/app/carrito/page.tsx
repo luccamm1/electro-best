@@ -214,7 +214,7 @@ export default function CartPage() {
 
             <button
               onClick={whatsappCheckout}
-              className="w-full flex items-center justify-center gap-2 bg-primary text-white py-4 rounded-2xl font-bold text-base hover:bg-primary-light transition-all duration-200 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 mb-3 active:scale-[0.98]"
+              className="w-full max-w-xs mx-auto flex items-center justify-center gap-2 bg-primary text-white py-5 rounded-2xl font-bold text-base hover:bg-primary-light transition-all duration-200 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 mb-3 active:scale-[0.98]"
             >
               <MessageCircle className="w-5 h-5" />
               Iniciar compra
@@ -224,7 +224,7 @@ export default function CartPage() {
               href={siteConfig.social.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl border-2 border-success text-success font-bold text-base hover:bg-success hover:text-white transition-all duration-200 active:scale-[0.98]"
+              className="flex items-center justify-center gap-2 w-full max-w-xs mx-auto py-5 rounded-2xl border-2 border-success text-success font-bold text-base hover:bg-success hover:text-white transition-all duration-200 active:scale-[0.98]"
             >
               <MessageCircle className="w-5 h-5" />
               Consultar por WhatsApp
