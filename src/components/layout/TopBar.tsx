@@ -1,5 +1,3 @@
-"use client";
-
 import { Phone, Truck, MessageCircle } from "lucide-react";
 import { siteConfig } from "@/lib/constants";
 
