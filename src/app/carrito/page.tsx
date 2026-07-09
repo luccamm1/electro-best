@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import {
   ShoppingCart,
@@ -32,11 +31,7 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center max-w-md mx-auto px-4"
-        >
+        <div className="text-center max-w-md mx-auto px-4 animate-fade-in-up">
           <div className="w-24 h-24 bg-bg-alt rounded-3xl flex items-center justify-center mx-auto mb-8">
             <ShoppingCart className="w-12 h-12 text-text-muted" />
           </div>
@@ -54,18 +49,14 @@ export default function CartPage() {
             <ArrowLeft className="w-5 h-5" />
             Ver productos
           </Link>
-        </motion.div>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between mb-8"
-      >
+      <div className="flex items-center justify-between mb-8 animate-fade-in-up">
         <div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-text tracking-tight">
             Tu Carrito
@@ -81,17 +72,15 @@ export default function CartPage() {
           <Trash2 className="w-4 h-4" />
           Vaciar carrito
         </button>
-      </motion.div>
+      </div>
 
       <div className="grid lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-4">
           {items.map((item, index) => (
-            <motion.div
+            <div
               key={item.product.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.05 }}
-              className="bg-white rounded-2xl p-4 sm:p-6 border border-border/50 shadow-sm hover:shadow-md transition-all duration-300"
+              className="bg-white rounded-2xl p-4 sm:p-6 border border-border/50 shadow-sm hover:shadow-md transition-all duration-300 animate-fade-up"
+              style={{ animationDelay: `${index * 50}ms` }}
             >
               <div className="flex gap-4 sm:gap-6">
                 <Link
@@ -159,16 +148,14 @@ export default function CartPage() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         <div className="lg:col-span-1">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="bg-white rounded-2xl p-6 sm:p-8 border border-border/50 shadow-sm sticky top-28"
+          <div
+            className="bg-white rounded-2xl p-6 sm:p-8 border border-border/50 shadow-sm sticky top-28 animate-fade-in-up"
+            style={{ animationDelay: "200ms" }}
           >
             <h2 className="text-xl font-bold text-text mb-6">
               Resumen de compra
@@ -232,7 +219,7 @@ export default function CartPage() {
                 <span>Hasta 12 cuotas sin interés</span>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>
