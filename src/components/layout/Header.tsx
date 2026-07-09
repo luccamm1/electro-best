@@ -82,7 +82,7 @@ export default function Header() {
             <SearchBar />
           </div>
 
-          <div className="flex items-center gap-1 sm:gap-2 sm:ml-0 ml-2">
+          <div className="flex items-center gap-1 sm:gap-2 sm:ml-0 ml-6">
             <Link
               href="/carrito"
               className="relative p-2.5 sm:p-3 rounded-xl hover:bg-bg-alt transition-colors group"
