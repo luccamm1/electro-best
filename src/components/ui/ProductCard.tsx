@@ -46,10 +46,10 @@ function ProductImage({ product }: { product: Product }) {
   return (
     <Link href={`/productos/${product.id}`}>
       <div
-        className={`relative w-full h-56 bg-gradient-to-br ${gradients[product.image] || "from-primary to-primary-light"} flex items-center justify-center overflow-hidden group/img`}
+        className={`relative w-full h-40 sm:h-44 bg-gradient-to-br ${gradients[product.image] || "from-primary to-primary-light"} flex items-center justify-center overflow-hidden group/img`}
       >
         <motion.span
-          className="text-7xl sm:text-8xl opacity-90 select-none transition-all duration-500 group-hover/img:scale-110 group-hover/img:rotate-6"
+          className="text-5xl sm:text-6xl opacity-90 select-none transition-all duration-500 group-hover/img:scale-110 group-hover/img:rotate-6"
           whileHover={{ scale: 1.1 }}
         >
           {icons[product.image] || "📦"}
@@ -93,42 +93,42 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         </button>
       </div>
 
-      <Link href={`/productos/${product.id}`} className="p-5 flex flex-col flex-1">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-[11px] text-text-muted font-bold uppercase tracking-[0.15em]">
+      <Link href={`/productos/${product.id}`} className="p-3 sm:p-4 flex flex-col flex-1">
+        <div className="flex items-center justify-between mb-1.5">
+          <span className="text-[10px] text-text-muted font-bold uppercase tracking-[0.15em]">
             {product.brand}
           </span>
-          <span className="text-[10px] text-text-muted/60 bg-bg-alt px-2 py-0.5 rounded-full">
+          <span className="text-[9px] text-text-muted/60 bg-bg-alt px-1.5 py-0.5 rounded-full">
             {product.category}
           </span>
         </div>
-        <h3 className="font-bold text-text text-sm sm:text-base leading-snug mb-3 line-clamp-2 group-hover:text-primary transition-colors">
+        <h3 className="font-bold text-text text-xs sm:text-sm leading-snug mb-2 line-clamp-2 group-hover:text-primary transition-colors">
           {product.name}
         </h3>
 
         <div className="mt-auto">
           {product.oldPrice && (
-            <div className="flex items-center gap-2 mb-1">
-              <p className="text-sm text-text-muted line-through">
+            <div className="flex items-center gap-1.5 mb-0.5">
+              <p className="text-xs text-text-muted line-through">
                 {formatPrice(product.oldPrice)}
               </p>
               {product.discount && (
-                <span className="text-xs font-bold text-success bg-success/10 px-2 py-0.5 rounded-full">
-                  Ahorrá {product.discount}%
+                <span className="text-[10px] font-bold text-success bg-success/10 px-1.5 py-0.5 rounded-full">
+                  -{product.discount}%
                 </span>
               )}
             </div>
           )}
-          <p className="text-2xl font-extrabold text-primary mb-4 tracking-tight">
+          <p className="text-xl font-extrabold text-primary mb-3 tracking-tight">
             {formatPrice(product.price)}
           </p>
 
-          <div className="grid grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-2 gap-2">
             <Link
               href={`/productos/${product.id}`}
-              className="col-span-2 flex items-center justify-center gap-2 bg-primary text-white py-3 rounded-xl font-bold text-sm hover:bg-primary-light transition-all duration-200 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
+              className="col-span-2 flex items-center justify-center gap-1.5 bg-primary text-white py-2 rounded-xl font-bold text-xs hover:bg-primary-light transition-all duration-200 shadow-md shadow-primary/20 active:scale-[0.98]"
             >
-              <Eye className="w-4 h-4" />
+              <Eye className="w-3.5 h-3.5" />
               Ver detalle
             </Link>
             <button
@@ -136,10 +136,10 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
                 e.preventDefault();
                 addItem(product);
               }}
-              className="col-span-2 flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-border text-text font-semibold text-sm hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-200 active:scale-[0.98]"
+              className="col-span-2 flex items-center justify-center gap-1.5 py-2 rounded-xl border border-border text-text font-semibold text-xs hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-200 active:scale-[0.98]"
             >
-              <ShoppingCart className="w-4 h-4" />
-              Agregar al carrito
+              <ShoppingCart className="w-3.5 h-3.5" />
+              Agregar
             </button>
           </div>
         </div>

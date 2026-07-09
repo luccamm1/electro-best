@@ -42,7 +42,7 @@ export default function FeaturedProducts() {
   );
 
   return (
-    <section className="relative py-20 sm:py-28 pb-20 sm:pb-36 bg-bg-alt">
+    <section className="relative py-16 sm:py-20 pb-16 sm:pb-24 bg-bg-alt">
       <div className="absolute inset-0 opacity-[0.02]">
         <div className="absolute inset-0" style={{
           backgroundImage: `radial-gradient(circle at 50% 50%, currentColor 1px, transparent 1px)`,
@@ -63,19 +63,19 @@ export default function FeaturedProducts() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="mb-14 sm:mb-20 last:mb-0"
+            className="mb-10 sm:mb-14 last:mb-0"
           >
-            <div className="flex items-center gap-3 mb-7 sm:mb-8">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl flex items-center justify-center shrink-0">
-                <span className="text-xl sm:text-2xl">
+            <div className="flex items-center gap-2.5 mb-5 sm:mb-6">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg flex items-center justify-center shrink-0">
+                <span className="text-base sm:text-lg">
                   {brandIcons[brand] || "🏷️"}
                 </span>
               </div>
               <div>
-                <h3 className="text-xl sm:text-2xl font-extrabold text-text">
+                <h3 className="text-base sm:text-lg font-extrabold text-text">
                   {brand}
                 </h3>
-                <p className="text-xs sm:text-sm text-text-muted">
+                <p className="text-[11px] sm:text-xs text-text-muted">
                   {brandProducts.length} producto{brandProducts.length !== 1 ? "s" : ""}
                 </p>
               </div>
@@ -89,19 +89,19 @@ export default function FeaturedProducts() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative mt-20 sm:mt-28 text-center"
+          className="relative mt-16 sm:mt-20 text-center"
         >
-          <div className="absolute left-1/2 -translate-x-1/2 -top-8 w-20 h-[3px] bg-gradient-to-r from-primary/30 via-primary to-primary/30 rounded-full" />
-          <p className="text-text-muted text-sm sm:text-base mb-5">
+          <div className="absolute left-1/2 -translate-x-1/2 -top-6 w-16 h-[2px] bg-gradient-to-r from-primary/20 via-primary to-primary/20 rounded-full" />
+          <p className="text-text-muted text-xs sm:text-sm mb-4">
             ¿No encontraste lo que buscabas? Tenemos más productos esperándote
           </p>
           <Button
             variant="primary"
             size="lg"
-            className="!px-10 sm:!px-14 !py-5 sm:!py-6 !text-base sm:!text-lg !shadow-2xl !shadow-primary/30 hover:!shadow-primary/40"
+            className="!px-8 sm:!px-10 !py-4 sm:!py-5 !text-sm sm:!text-base !shadow-xl !shadow-primary/25 hover:!shadow-primary/30"
           >
             Ver todos los productos
-            <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
+            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
           </Button>
         </motion.div>
       </div>

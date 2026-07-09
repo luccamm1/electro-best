@@ -117,7 +117,7 @@ export default function BrandCarousel({ products, brand }: BrandCarouselProps) {
             <div
               key={product.id}
               ref={index === 0 ? cardRef : undefined}
-              className="min-w-[280px] sm:min-w-[300px] lg:min-w-[280px] xl:min-w-[310px] flex-shrink-0"
+              className="min-w-[230px] sm:min-w-[250px] lg:min-w-[240px] xl:min-w-[260px] flex-shrink-0"
             >
               <ProductCard product={product} index={index} />
             </div>
