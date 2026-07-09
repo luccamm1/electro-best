@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
 import { Search, TrendingUp, Clock, X } from "lucide-react";
 import { products, categories, brands } from "@/lib/constants";
 
@@ -31,6 +30,11 @@ export default function SearchBar() {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -216,122 +220,114 @@ export default function SearchBar() {
             </button>
           )}
 
-          <motion.button
+          <button
             type="submit"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="mr-1.5 w-[42px] h-[42px] bg-primary text-white rounded-full flex items-center justify-center hover:bg-primary-light transition-all duration-200 shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30"
+            className="mr-1.5 w-[42px] h-[42px] bg-primary text-white rounded-full flex items-center justify-center hover:bg-primary-light hover:scale-105 active:scale-95 transition-all duration-200 shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30"
           >
             <Search className="w-[18px] h-[18px]" />
-          </motion.button>
+          </button>
         </div>
       </form>
 
-      <AnimatePresence>
-        {showDropdown && (
-          <motion.div
-            initial={{ opacity: 0, y: -8, scaleY: 0.95 }}
-            animate={{ opacity: 1, y: 0, scaleY: 1 }}
-            exit={{ opacity: 0, y: -8, scaleY: 0.95 }}
-            transition={{ duration: 0.18, ease: "easeOut" }}
-            className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-border/60 overflow-hidden z-50 origin-top"
-          >
-            {!query.trim() && recentSearches.length > 0 && (
-              <div className="px-4 pt-3 pb-1">
-                <div className="flex items-center gap-2 text-xs font-semibold text-text-muted uppercase tracking-wider">
-                  <Clock className="w-3.5 h-3.5" />
-                  Búsquedas recientes
-                </div>
-              </div>
-            )}
-
-            {query.trim() && hasResults && (
-              <div className="px-4 pt-3 pb-1">
-                <div className="flex items-center gap-2 text-xs font-semibold text-text-muted uppercase tracking-wider">
-                  <TrendingUp className="w-3.5 h-3.5" />
-                  Sugerencias
-                </div>
-              </div>
-            )}
-
-            {query.trim() && !hasResults && (
-              <div className="px-6 py-8 text-center">
-                <div className="text-3xl mb-3">🔍</div>
-                <p className="text-text-muted text-sm">
-                  No encontramos resultados para{" "}
-                  <span className="font-semibold text-text">
-                    &quot;{query}&quot;
-                  </span>
-                </p>
-                <p className="text-text-muted/60 text-xs mt-1">
-                  Probá con otros términos
-                </p>
-              </div>
-            )}
-
-            {hasResults && (
-              <div className="p-2">
-                {suggestions.map((s, i) => (
-                  <motion.button
-                    key={`${s.type}-${s.label}`}
-                    initial={{ opacity: 0, x: -8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.03 }}
-                    type="button"
-                    onClick={() => {
-                      saveRecentSearch(s.label);
-                      router.push(s.href);
-                      setIsFocused(false);
-                      inputRef.current?.blur();
-                    }}
-                    onMouseEnter={() => setSelectedIndex(i)}
-                    className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm transition-all duration-150 text-left ${
-                      selectedIndex === i
-                        ? "bg-primary/5 text-primary"
-                        : "text-text hover:bg-bg-alt"
-                    }`}
-                  >
-                    <span className="text-lg shrink-0">{s.icon}</span>
-                    <div className="flex items-center gap-2 min-w-0 flex-1">
-                      {s.type === "product" && query.trim() ? (
-                        <span className="truncate font-medium">
-                          {highlightMatch(s.label, query)}
-                        </span>
-                      ) : (
-                        <span className="truncate font-medium">
-                          {s.label}
-                        </span>
-                      )}
-                      <span className="ml-auto text-[10px] text-text-muted/50 uppercase shrink-0">
-                        {s.type === "product"
-                          ? "Producto"
-                          : s.type === "category"
-                          ? "Categoría"
-                          : s.type === "brand"
-                          ? "Marca"
-                          : ""}
-                      </span>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-            )}
-
-            {query.trim() && (
-              <div className="px-4 py-2.5 border-t border-border/50 bg-bg-alt/50">
-                <button
-                  type="button"
-                  onClick={handleSubmit}
-                  className="flex items-center justify-center gap-2 w-full py-2 text-sm font-semibold text-primary hover:text-primary-light transition-colors"
-                >
-                  <Search className="w-4 h-4" />
-                  Buscar &quot;{query}&quot; en todos los productos
-                </button>
-              </div>
-            )}
-          </motion.div>
+      <div
+        className={`absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-border/60 overflow-hidden z-50 origin-top transition-all duration-200 ease-out ${
+          showDropdown && mounted
+            ? "opacity-100 translate-y-0 scale-y-100 pointer-events-auto"
+            : "opacity-0 -translate-y-2 scale-y-95 pointer-events-none"
+        }`}
+      >
+        {!query.trim() && recentSearches.length > 0 && (
+          <div className="px-4 pt-3 pb-1">
+            <div className="flex items-center gap-2 text-xs font-semibold text-text-muted uppercase tracking-wider">
+              <Clock className="w-3.5 h-3.5" />
+              Búsquedas recientes
+            </div>
+          </div>
         )}
-      </AnimatePresence>
+
+        {query.trim() && hasResults && (
+          <div className="px-4 pt-3 pb-1">
+            <div className="flex items-center gap-2 text-xs font-semibold text-text-muted uppercase tracking-wider">
+              <TrendingUp className="w-3.5 h-3.5" />
+              Sugerencias
+            </div>
+          </div>
+        )}
+
+        {query.trim() && !hasResults && (
+          <div className="px-6 py-8 text-center">
+            <div className="text-3xl mb-3">🔍</div>
+            <p className="text-text-muted text-sm">
+              No encontramos resultados para{" "}
+              <span className="font-semibold text-text">
+                &quot;{query}&quot;
+              </span>
+            </p>
+            <p className="text-text-muted/60 text-xs mt-1">
+              Probá con otros términos
+            </p>
+          </div>
+        )}
+
+        {hasResults && (
+          <div className="p-2">
+            {suggestions.map((s, i) => (
+              <button
+                key={`${s.type}-${s.label}`}
+                type="button"
+                onClick={() => {
+                  saveRecentSearch(s.label);
+                  router.push(s.href);
+                  setIsFocused(false);
+                  inputRef.current?.blur();
+                }}
+                onMouseEnter={() => setSelectedIndex(i)}
+                className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm transition-all duration-150 text-left ${
+                  selectedIndex === i
+                    ? "bg-primary/5 text-primary"
+                    : "text-text hover:bg-bg-alt"
+                }`}
+                style={{ animationDelay: `${i * 30}ms` }}
+              >
+                <span className="text-lg shrink-0">{s.icon}</span>
+                <div className="flex items-center gap-2 min-w-0 flex-1">
+                  {s.type === "product" && query.trim() ? (
+                    <span className="truncate font-medium">
+                      {highlightMatch(s.label, query)}
+                    </span>
+                  ) : (
+                    <span className="truncate font-medium">
+                      {s.label}
+                    </span>
+                  )}
+                  <span className="ml-auto text-[10px] text-text-muted/50 uppercase shrink-0">
+                    {s.type === "product"
+                      ? "Producto"
+                      : s.type === "category"
+                      ? "Categoría"
+                      : s.type === "brand"
+                      ? "Marca"
+                      : ""}
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
+        )}
+
+        {query.trim() && (
+          <div className="px-4 py-2.5 border-t border-border/50 bg-bg-alt/50">
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className="flex items-center justify-center gap-2 w-full py-2 text-sm font-semibold text-primary hover:text-primary-light transition-colors"
+            >
+              <Search className="w-4 h-4" />
+              Buscar &quot;{query}&quot; en todos los productos
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

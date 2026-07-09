@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import {
   ShoppingCart,
   User,
@@ -32,12 +31,13 @@ const menuItems = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { scrollY } = useScroll();
   const { itemCount } = useCart();
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setIsScrolled(latest > 20);
-  });
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <header
@@ -89,14 +89,12 @@ export default function Header() {
             >
               <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 text-text-muted group-hover:text-primary transition-colors" />
               {itemCount > 0 && (
-                <motion.span
+                <span
                   key={itemCount}
-                  initial={{ scale: 1.5 }}
-                  animate={{ scale: 1 }}
-                  className="absolute -top-0.5 -right-0.5 min-w-[20px] h-5 bg-secondary text-black text-[11px] font-bold rounded-full flex items-center justify-center px-1 shadow-md"
+                  className="absolute -top-0.5 -right-0.5 min-w-[20px] h-5 bg-secondary text-black text-[11px] font-bold rounded-full flex items-center justify-center px-1 shadow-md animate-scale-in"
                 >
                   {itemCount}
-                </motion.span>
+                </span>
               )}
             </Link>
             <button className="p-2.5 sm:p-3 rounded-xl hover:bg-bg-alt transition-colors group hidden sm:block">
@@ -111,23 +109,16 @@ export default function Header() {
       </div>
 
       {isMobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/30 z-40 lg:hidden"
+        <div
+          className="fixed inset-0 bg-black/30 z-40 lg:hidden transition-opacity duration-200"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
 
-      <motion.div
-        initial={false}
-        animate={{
-          height: isMobileMenuOpen ? "auto" : 0,
-          opacity: isMobileMenuOpen ? 1 : 0,
-        }}
-        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-        className="overflow-hidden lg:hidden bg-white border-t border-border shadow-xl relative z-50"
+      <div
+        className={`overflow-hidden lg:hidden bg-white border-t border-border shadow-xl relative z-50 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+          isMobileMenuOpen ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0"
+        }`}
       >
         <nav className="px-4 py-4 space-y-1">
           <div className="flex items-center gap-3 px-4 py-2 mb-2">
@@ -142,25 +133,19 @@ export default function Header() {
 
           <div className="h-px bg-gradient-to-r from-border/0 via-border to-border/0 mb-2" />
 
-          {menuItems.map(({ label, href, icon: Icon }, i) => (
-            <motion.div
+          {menuItems.map(({ label, href, icon: Icon }) => (
+            <Link
               key={label}
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: i * 0.05 }}
+              href={href}
+              className="group flex items-center gap-3 px-4 py-3.5 rounded-xl text-text font-medium hover:bg-gradient-to-r hover:from-primary/5 hover:to-secondary/5 hover:text-primary transition-all duration-200"
+              onClick={() => setIsMobileMenuOpen(false)}
             >
-              <Link
-                href={href}
-                className="group flex items-center gap-3 px-4 py-3.5 rounded-xl text-text font-medium hover:bg-gradient-to-r hover:from-primary/5 hover:to-secondary/5 hover:text-primary transition-all duration-200"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <div className="w-9 h-9 rounded-lg bg-bg-alt group-hover:bg-primary/10 flex items-center justify-center transition-colors">
-                  <Icon className="w-4.5 h-4.5 text-text-muted group-hover:text-primary transition-colors" />
-                </div>
-                <span className="flex-1">{label}</span>
-                <ChevronRight className="w-4 h-4 text-text-muted/40 group-hover:text-primary/40 transition-colors" />
-              </Link>
-            </motion.div>
+              <div className="w-9 h-9 rounded-lg bg-bg-alt group-hover:bg-primary/10 flex items-center justify-center transition-colors">
+                <Icon className="w-4.5 h-4.5 text-text-muted group-hover:text-primary transition-colors" />
+              </div>
+              <span className="flex-1">{label}</span>
+              <ChevronRight className="w-4 h-4 text-text-muted/40 group-hover:text-primary/40 transition-colors" />
+            </Link>
           ))}
 
           <div className="h-px bg-gradient-to-r from-border/0 via-border to-border/0 my-3" />
@@ -172,22 +157,16 @@ export default function Header() {
           </div>
 
           <div className="grid grid-cols-2 gap-1.5 px-2">
-            {categories.map((cat, i) => (
-              <motion.div
+            {categories.map((cat) => (
+              <Link
                 key={cat.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + i * 0.04 }}
+                href={`/categorias/${cat.slug}`}
+                className="flex items-center gap-2.5 px-3 py-3 rounded-xl text-sm font-medium text-text hover:bg-bg-alt hover:text-primary transition-all duration-200"
+                onClick={() => setIsMobileMenuOpen(false)}
               >
-                <Link
-                  href={`/categorias/${cat.slug}`}
-                  className="flex items-center gap-2.5 px-3 py-3 rounded-xl text-sm font-medium text-text hover:bg-bg-alt hover:text-primary transition-all duration-200"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <span className="text-lg">{cat.icon}</span>
-                  <span>{cat.name}</span>
-                </Link>
-              </motion.div>
+                <span className="text-lg">{cat.icon}</span>
+                <span>{cat.name}</span>
+              </Link>
             ))}
           </div>
 
@@ -226,7 +205,7 @@ export default function Header() {
             </div>
           </div>
         </nav>
-      </motion.div>
+      </div>
     </header>
   );
 }

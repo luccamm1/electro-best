@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
 
 interface ButtonProps {
@@ -48,18 +45,16 @@ export default function Button({
   };
 
   return (
-    <motion.button
+    <button
       type={type}
       onClick={onClick}
       disabled={disabled || loading}
-      className={`${base} ${sizes[size]} ${variants[variant]} ${
+      className={`${base} ${sizes[size]} ${variants[variant]} active:scale-[0.97] hover:scale-[1.03] ${
         disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
       } ${className}`}
-      whileHover={disabled ? {} : { scale: 1.03 }}
-      whileTap={disabled ? {} : { scale: 0.97 }}
     >
       {loading && <Loader2 className="w-5 h-5 animate-spin" />}
       {children}
-    </motion.button>
+    </button>
   );
 }
