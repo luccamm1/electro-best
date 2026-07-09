@@ -84,16 +84,15 @@ export default function Categories() {
               onClick={(e) => {
                 if (dragDistRef.current > 5) e.preventDefault();
               }}
-              className="group shrink-0 bg-white rounded-2xl p-5 sm:p-7 border border-border/50 hover:border-secondary/30 shadow-sm hover:-translate-y-1 hover:shadow-xl hover:shadow-secondary/10 transition-all duration-300 flex flex-col items-center text-center"
+              className="group shrink-0 flex flex-col items-center text-center"
               style={{ width: CARD_WIDTH }}
             >
-              <div className="w-14 h-14 sm:w-[72px] sm:h-[72px] bg-gradient-to-br from-bg-alt to-bg group-hover:from-secondary/20 group-hover:to-secondary/5 rounded-2xl flex items-center justify-center mb-3 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-lg group-hover:shadow-secondary/20">
-                <span className="text-2xl sm:text-3xl">{cat.icon}</span>
-              </div>
+              <span className="text-3xl sm:text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">
+                {cat.icon}
+              </span>
               <h3 className="font-bold text-text text-sm sm:text-base group-hover:text-primary transition-colors">
                 {cat.name}
               </h3>
-              <div className="mt-2 w-6 h-0.5 bg-border group-hover:bg-secondary rounded-full transition-all duration-300 group-hover:w-10" />
             </a>
           ))}
         </motion.div>

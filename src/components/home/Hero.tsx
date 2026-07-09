@@ -15,21 +15,20 @@ const slides = [
 export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [viewWidth, setViewWidth] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [viewWidth, setViewWidth] = useState(0);
 
   const maxIndex = slides.length - 1;
 
   useEffect(() => {
-    const measure = () => setViewWidth(window.innerWidth);
-    measure();
-    const ro = new ResizeObserver(measure);
-    if (containerRef.current) ro.observe(containerRef.current);
-    window.addEventListener("resize", measure);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", measure);
-    };
+    const el = containerRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => {
+      setViewWidth(entry.contentRect.width || window.innerWidth);
+    });
+    ro.observe(el);
+    setViewWidth(el.clientWidth || window.innerWidth);
+    return () => ro.disconnect();
   }, []);
 
   useEffect(() => {
@@ -69,34 +68,32 @@ export default function Hero() {
         <ChevronLeft className="w-5 h-5" />
       </button>
 
-      <div className="absolute inset-0">
-        <motion.div
-          className="flex h-full"
-          animate={{ x: -(currentIndex * viewWidth) }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          drag="x"
-          dragConstraints={{
-            left: -(maxIndex * viewWidth),
-            right: 0,
-          }}
-          dragElastic={0.1}
-          onDragEnd={handleDragEnd}
-        >
-          {slides.map((slide, i) => (
-            <div key={i} className="w-screen h-full flex-shrink-0 flex items-center justify-center bg-primary-dark">
-              <Image
-                src={slide.image}
-                alt=""
-                fill
-                className="object-cover"
-                draggable={false}
-                priority={i === 0}
-                sizes="100vw"
-              />
-            </div>
-          ))}
-        </motion.div>
-      </div>
+      <motion.div
+        className="flex h-full"
+        animate={{ x: -(currentIndex * viewWidth) }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        drag="x"
+        dragConstraints={{
+          left: -(maxIndex * viewWidth),
+          right: 0,
+        }}
+        dragElastic={0.1}
+        onDragEnd={handleDragEnd}
+      >
+        {slides.map((slide, i) => (
+          <div key={i} className="relative w-screen h-full flex-shrink-0 flex items-center justify-center bg-primary-dark overflow-hidden">
+            <Image
+              src={slide.image}
+              alt=""
+              fill
+              className="object-cover"
+              draggable={false}
+              priority={i === 0}
+              sizes="100vw"
+            />
+          </div>
+        ))}
+      </motion.div>
 
       <button
         onClick={goNext}
