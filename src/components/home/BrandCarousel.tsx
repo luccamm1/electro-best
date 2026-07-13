@@ -69,6 +69,17 @@ export default function BrandCarousel({ products, brand }: BrandCarouselProps) {
           className="flex gap-5"
           animate={{ x: -x }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          drag="x"
+          dragConstraints={{
+            left: -(maxIndex * slideDistance),
+            right: 0,
+          }}
+          dragElastic={0.1}
+          onDragEnd={(_, info) => {
+            const threshold = 50;
+            if (info.offset.x < -threshold) goNext();
+            else if (info.offset.x > threshold) goPrev();
+          }}
         >
           {products.map((product, index) => (
             <div
