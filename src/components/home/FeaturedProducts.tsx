@@ -7,11 +7,12 @@ import Link from "next/link";
 
 const brandIcons: Record<string, string> = {
   Yelmo: "☕",
+  Enova: "📺",
+  Philco: "❄️",
   Apple: "🍎",
   JBL: "🔊",
   LG: "💡",
   HP: "🖨️",
-  Enova: "📺",
   Philips: "💈",
   Liliana: "🥤",
   Atma: "🔥",
