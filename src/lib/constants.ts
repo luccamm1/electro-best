@@ -19,6 +19,7 @@ export interface Category {
   name: string;
   icon: string;
   slug: string;
+  image?: string;
 }
 
 export interface Testimonial {
@@ -38,14 +39,11 @@ export interface Benefit {
 }
 
 export const categories: Category[] = [
-  { id: 1, name: "Smart TV", icon: "📺", slug: "smart-tv" },
-  { id: 2, name: "Celulares", icon: "📱", slug: "celulares" },
-  { id: 3, name: "Audio", icon: "🔊", slug: "audio" },
-  { id: 4, name: "Refrigeración", icon: "❄️", slug: "refrigeracion" },
-  { id: 5, name: "Calefacción", icon: "🔥", slug: "calefaccion" },
-  { id: 6, name: "Cocina", icon: "🍳", slug: "cocina" },
-  { id: 7, name: "Hogar", icon: "🧹", slug: "hogar" },
-  { id: 8, name: "Tecnología", icon: "💻", slug: "tecnologia" },
+  { id: 1, name: "Smart TV", icon: "📺", slug: "smart-tv", image: "/images/smarttv-categoria.webp" },
+  { id: 2, name: "Celulares", icon: "📱", slug: "celulares", image: "/images/celulares-categoria.webp" },
+  { id: 3, name: "Audio", icon: "🔊", slug: "audio", image: "/images/audio-categoria.webp" },
+  { id: 5, name: "Calefacción", icon: "🔥", slug: "calefaccion", image: "/images/calefaccion-categoria.webp" },
+  { id: 7, name: "Hogar", icon: "🧹", slug: "hogar", image: "/images/hogar-categoria.webp" },
 ];
 
 export const products: Product[] = [

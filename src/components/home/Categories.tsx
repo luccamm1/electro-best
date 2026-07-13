@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import Image from "next/image";
 import { motion, useMotionValue } from "framer-motion";
 import { categories } from "@/lib/constants";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -88,9 +89,20 @@ export default function Categories() {
               style={{ width: CARD_WIDTH }}
             >
               <div className="flex flex-col items-center text-center p-5 bg-white rounded-2xl border border-border/50 shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-primary/20 transition-all duration-300">
-                <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                  {cat.icon}
-                </span>
+                {cat.image ? (
+                  <div className="relative w-16 h-16 mb-3">
+                    <Image
+                      src={cat.image}
+                      alt={cat.name}
+                      fill
+                      className="object-contain group-hover:scale-110 transition-transform duration-300"
+                    />
+                  </div>
+                ) : (
+                  <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                    {cat.icon}
+                  </span>
+                )}
                 <h3 className="font-semibold text-text text-sm group-hover:text-primary transition-colors">
                   {cat.name}
                 </h3>
