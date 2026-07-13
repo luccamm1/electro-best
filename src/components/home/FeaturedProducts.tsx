@@ -60,9 +60,9 @@ export default function FeaturedProducts() {
             key={brand}
             className="mb-14 sm:mb-20 last:mb-0"
           >
-            <div className="flex items-center gap-3 mb-5 sm:mb-6">
+            <div className="flex items-center justify-center mb-5 sm:mb-6">
               {brandLogos[brand] ? (
-                <div className="relative w-20 h-10 sm:w-28 sm:h-12 shrink-0">
+                <div className="relative w-28 h-14 sm:w-36 sm:h-16">
                   <Image
                     src={brandLogos[brand]}
                     alt={brand}
@@ -71,20 +71,10 @@ export default function FeaturedProducts() {
                   />
                 </div>
               ) : (
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg flex items-center justify-center shrink-0">
-                  <span className="text-base sm:text-lg">
-                    {brandIcons[brand] || "🏷️"}
-                  </span>
-                </div>
+                <span className="text-2xl sm:text-3xl">
+                  {brandIcons[brand] || "🏷️"}
+                </span>
               )}
-              <div>
-                <h3 className="text-base sm:text-lg font-extrabold text-text">
-                  {brand}
-                </h3>
-                <p className="text-[11px] sm:text-xs text-text-muted">
-                  {brandProducts.length} producto{brandProducts.length !== 1 ? "s" : ""}
-                </p>
-              </div>
             </div>
 
             <BrandCarousel products={brandProducts} brand={brand} />
