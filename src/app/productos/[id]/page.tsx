@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -34,12 +35,14 @@ const gradients: Record<string, string> = {
   oven: "from-orange-400 via-orange-500 to-red-600",
   heater: "from-red-400 via-red-500 to-orange-600",
   fan: "from-emerald-400 via-emerald-500 to-teal-600",
+  coffee: "from-amber-700 via-amber-800 to-stone-900",
 };
 
 const icons: Record<string, string> = {
   tv: "📺", phone: "📱", speaker: "🔊", fridge: "❄️",
   laptop: "💻", stove: "🍳", ac: "❄️", blender: "🥤",
   freezer: "🧊", oven: "🔥", heater: "🌡️", fan: "🌀",
+  coffee: "☕",
 };
 
 export default function ProductDetailPage() {
@@ -99,6 +102,18 @@ export default function ProductDetailPage() {
             transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="relative"
           >
+            {product.image.startsWith("/") ? (
+              <div className="relative w-full aspect-square rounded-3xl bg-bg-alt flex items-center justify-center overflow-hidden shadow-xl">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-contain p-6 sm:p-10"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
+              </div>
+            ) : (
             <div
               className={`relative w-full aspect-square rounded-3xl bg-gradient-to-br ${gradients[product.image] || "from-primary to-primary-light"} flex items-center justify-center overflow-hidden shadow-xl`}
             >
@@ -111,6 +126,8 @@ export default function ProductDetailPage() {
                 {icons[product.image] || "📦"}
               </motion.span>
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10" />
+            </div>
+            )}
 
               {product.isOffer && (
                 <div className="absolute top-6 left-6 z-10">
@@ -132,7 +149,6 @@ export default function ProductDetailPage() {
               <button className="absolute top-6 right-20 z-10 p-3 bg-white/90 backdrop-blur-sm rounded-2xl hover:bg-white hover:scale-105 transition-all duration-200 shadow-lg">
                 <Share2 className="w-5 h-5 text-text-muted hover:text-primary transition-colors" />
               </button>
-            </div>
           </motion.div>
 
           <motion.div

@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 import Link from "next/link";
 
 const brandIcons: Record<string, string> = {
-  Samsung: "📺",
+  Yelmo: "☕",
   Apple: "🍎",
   JBL: "🔊",
   LG: "💡",

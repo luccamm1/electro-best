@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import type { Product } from "@/lib/constants";
@@ -25,12 +26,14 @@ const gradients: Record<string, string> = {
   oven: "from-orange-400 via-orange-500 to-red-600",
   heater: "from-red-400 via-red-500 to-orange-600",
   fan: "from-emerald-400 via-emerald-500 to-teal-600",
+  coffee: "from-amber-700 via-amber-800 to-stone-900",
 };
 
 const icons: Record<string, string> = {
   tv: "📺", phone: "📱", speaker: "🔊", fridge: "❄️",
   laptop: "💻", stove: "🍳", ac: "❄️", blender: "🥤",
   freezer: "🧊", oven: "🔥", heater: "🌡️", fan: "🌀",
+  coffee: "☕",
 };
 
 export default function ProductCard({ product, index = 0, animated = true }: ProductCardProps) {
@@ -48,14 +51,26 @@ export default function ProductCard({ product, index = 0, animated = true }: Pro
     >
       <div className="relative overflow-hidden">
         <Link href={`/productos/${product.id}`}>
-          <div
-            className={`relative w-full h-40 sm:h-44 bg-gradient-to-br ${gradients[product.image] || "from-primary to-primary-light"} flex items-center justify-center overflow-hidden`}
-          >
-            <span className="text-5xl sm:text-6xl opacity-90 select-none transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
-              {icons[product.image] || "📦"}
-            </span>
-            <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/20" />
-          </div>
+          {product.image.startsWith("/") ? (
+            <div className="relative w-full h-40 sm:h-44 bg-bg-alt flex items-center justify-center overflow-hidden">
+              <Image
+                src={product.image}
+                alt={product.name}
+                fill
+                className="object-contain p-2"
+                sizes="(max-width: 640px) 50vw, 25vw"
+              />
+            </div>
+          ) : (
+            <div
+              className={`relative w-full h-40 sm:h-44 bg-gradient-to-br ${gradients[product.image] || "from-primary to-primary-light"} flex items-center justify-center overflow-hidden`}
+            >
+              <span className="text-5xl sm:text-6xl opacity-90 select-none transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
+                {icons[product.image] || "📦"}
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/20" />
+            </div>
+          )}
         </Link>
         {product.isOffer && (
           <div className="absolute top-3 left-3 z-10">
