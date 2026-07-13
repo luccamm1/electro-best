@@ -1,10 +1,17 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { brands } from "@/lib/constants";
 import SectionTitle from "@/components/ui/SectionTitle";
+
+const brandLogos: Record<string, string> = {
+  Yelmo: "/images/yelmo-logo.png",
+  Enova: "/images/enova-logo.jpg",
+  Philco: "/images/philco-logo.png",
+};
 
 const GAP = 24;
 
@@ -107,10 +114,21 @@ export default function BrandsCarousel() {
                   ref={index === 0 ? cardRef : undefined}
                   className="shrink-0 w-[180px] sm:w-[220px]"
                 >
-                  <div className="flex items-center justify-center h-28 sm:h-32 bg-white rounded-2xl border border-border/30 shadow-sm hover:shadow-md hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300 group">
-                    <span className="text-xl sm:text-2xl font-bold text-text-muted group-hover:text-primary transition-colors">
-                      {brand}
-                    </span>
+                  <div className="flex items-center justify-center h-28 sm:h-32 bg-white rounded-2xl border border-border/30 shadow-sm hover:shadow-md hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300 group p-4 sm:p-6">
+                    {brandLogos[brand] ? (
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={brandLogos[brand]}
+                          alt={brand}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                    ) : (
+                      <span className="text-xl sm:text-2xl font-bold text-text-muted group-hover:text-primary transition-colors">
+                        {brand}
+                      </span>
+                    )}
                   </div>
                 </div>
               ))}
