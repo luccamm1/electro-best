@@ -620,7 +620,7 @@ export const siteConfig = {
   phone: "381 4889847",
   whatsapp: "5493814889847",
   email: "info@electrobest.com.ar",
-  address: "Av. Roca 1604",
+  address: "Av. Colón 172",
   city: "San Miguel de Tucumán",
   province: "Tucumán",
   hours: {
