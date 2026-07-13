@@ -152,8 +152,17 @@ export default function Footer() {
 
             <div className="mt-6 bg-white/[0.04] backdrop-blur-sm rounded-2xl p-4 border border-white/5">
               <p className="text-xs text-white/40 mb-3">📍 Encontranos en</p>
-              <div className="bg-white/10 rounded-xl h-28 flex items-center justify-center text-white/30 text-sm">
-                Mapa interactivo
+              <div className="rounded-xl overflow-hidden">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.395583054582!2d-65.2350653262784!3d-26.82736757669812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94225c60ad9923b9%3A0x4f3308999419160c!2sAv.%20Col%C3%B3n%20172%2C%20T4000%20San%20Miguel%20de%20Tucum%C3%A1n%2C%20Tucum%C3%A1n!5e0!3m2!1ses-419!2sar!4v1783964804462!5m2!1ses-419!2sar"
+                  width="100%"
+                  height="180"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  title="Ubicación Electro Best"
+                />
               </div>
             </div>
             </div>
