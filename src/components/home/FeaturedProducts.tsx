@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { products, brands } from "@/lib/constants";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -5,10 +6,13 @@ import BrandCarousel from "@/components/home/BrandCarousel";
 import Button from "@/components/ui/Button";
 import Link from "next/link";
 
+const brandLogos: Record<string, string> = {
+  Yelmo: "/images/yelmo-logo.png",
+  Enova: "/images/enova-logo.jpg",
+  Philco: "/images/philco-logo.png",
+};
+
 const brandIcons: Record<string, string> = {
-  Yelmo: "☕",
-  Enova: "📺",
-  Philco: "❄️",
   Apple: "🍎",
   JBL: "🔊",
   LG: "💡",
@@ -56,12 +60,23 @@ export default function FeaturedProducts() {
             key={brand}
             className="mb-14 sm:mb-20 last:mb-0"
           >
-            <div className="flex items-center gap-2.5 mb-5 sm:mb-6">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg flex items-center justify-center shrink-0">
-                <span className="text-base sm:text-lg">
-                  {brandIcons[brand] || "🏷️"}
-                </span>
-              </div>
+            <div className="flex items-center gap-3 mb-5 sm:mb-6">
+              {brandLogos[brand] ? (
+                <div className="relative w-20 h-10 sm:w-28 sm:h-12 shrink-0">
+                  <Image
+                    src={brandLogos[brand]}
+                    alt={brand}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              ) : (
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg flex items-center justify-center shrink-0">
+                  <span className="text-base sm:text-lg">
+                    {brandIcons[brand] || "🏷️"}
+                  </span>
+                </div>
+              )}
               <div>
                 <h3 className="text-base sm:text-lg font-extrabold text-text">
                   {brand}
