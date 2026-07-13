@@ -11,7 +11,7 @@ const brandIcons: Record<string, string> = {
   JBL: "🔊",
   LG: "💡",
   HP: "🖨️",
-  Enova: "🍳",
+  Enova: "📺",
   Philips: "💈",
   Liliana: "🥤",
   Atma: "🔥",
